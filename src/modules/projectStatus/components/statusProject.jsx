@@ -55,6 +55,7 @@ export const StatusProject = ({ page }) => {
     ));
   return (
     <div>
+      <div className='header'>PROJECT STATUS</div>
       <div className='my-3 mx-3 text-right'>
         <button onClick={addStatusProject} className='btn'>
           Create

@@ -59,6 +59,7 @@ export const TypeProject = ({ page }) => {
       ));
   return (
     <div>
+      <div className='header'>PROJECT TYPE</div>
       <div className='my-3 mx-3 text-right'>
         <button onClick={addTypeProject} className='btn'>
           Create

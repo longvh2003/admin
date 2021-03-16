@@ -52,6 +52,7 @@ export const Department = ({ page }) => {
     ));
   return (
     <div>
+      <div className='header'>DEPARTMENT</div>
       <div className='my-3 mx-3 text-right'>
         <button onClick={addDepartment} className='btn'>
           Create

@@ -52,6 +52,7 @@ export const Project = ({ page }) => {
     ));
   return (
     <div>
+      <div className='header'>PROJECT</div>
       <div className='my-3 mx-3 text-right'>
         <button onClick={addProject} className='btn'>
           Create

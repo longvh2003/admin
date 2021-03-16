@@ -58,6 +58,7 @@ export const Customer = ({ page }) => {
     ));
   return (
     <div>
+      <div className='header'>CUSTOMER</div>
       <div className='my-3 mx-3 text-right'>
         <button onClick={addCustomer} className='btn'>
           Create

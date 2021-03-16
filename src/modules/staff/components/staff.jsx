@@ -52,6 +52,7 @@ export const Staff = ({ page }) => {
     ));
   return (
     <div>
+      <div className='header'>STAFF</div>
       <div className='my-3 mx-3 text-right'>
         <button onClick={addStaff} className='btn'>
           Create

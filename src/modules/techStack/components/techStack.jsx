@@ -56,6 +56,7 @@ export const TechStack = ({ page }) => {
     ));
   return (
     <div>
+      <div className='header'>TECH STACK</div>
       <div className='my-3 mx-3 text-right'>
         <button onClick={addTechStack} className='btn'>
           Create
