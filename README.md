@@ -1,5 +1,5 @@
 # Account admin
-Email: admin01@gmail.com 
+Email: admin@gmail.com 
 
 
 Password: admin123
