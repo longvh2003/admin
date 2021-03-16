@@ -1,0 +1,6 @@
+export const DELETE_STATUS_PROJECT = 'DELETE_STATUS_PROJECT';
+export const TABLE_NAME = 'projectStatus';
+export const GET_STATUS_PROJECT = 'GET_STATUS_PROJECT';
+export const UPDATE_STATUS_PROJECT = 'UPDATE_STATUS_PROJECT';
+export const ADD_STATUS_PROJECT = 'ADD_STATUS_PROJECT';
+export const LIMIT = 3;

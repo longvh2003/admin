@@ -1,0 +1,70 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.containerLeftMenu{
+    @apply bg-gray-800 text-white text-sm font-semibold
+}
+.imageLeftMenu{
+    @apply rounded-full h-12 w-12 flex items-center justify-center cursor-pointer
+}
+.statusLeftMenu{
+    @apply text-blue-500 px-2 
+}
+.headerLeftMenu{
+    @apply pl-8 py-3 
+}
+.btnLeftMenu{
+    @apply w-full bg-gray-700 hover:bg-gray-800 text-gray-300 hover:text-white py-2 pl-4 rounded-l text-left
+}
+.rowTable{
+    @apply border-b border-gray-200 hover:bg-gray-100
+}
+.rowHeader{
+    @apply bg-gray-200 text-gray-600 uppercase text-sm leading-normal
+}
+.headerTable{
+    @apply py-3 px-6 text-center text-gray-600
+}
+.dataTable{
+    @apply flex text-center justify-center
+}
+.btn{
+    @apply bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded
+}
+.header{
+    @apply text-center py-9 font-bold text-2xl
+}
+.statusTable{
+    @apply bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs
+}
+.containerDetail{
+    @apply absolute border border-gray-300 rounded-md my-4 py-4 px-6 left-1/3 w-1/2
+}
+.inputDetail{
+    @apply px-4 py-2 border w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600
+}
+.groupBtn{
+    @apply py-3 pt-4 flex items-center space-x-4
+}
+.btnCancel{
+    @apply flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none
+}
+.btnConfirm{
+    @apply bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none
+}
+.groupData{
+    @apply flex flex-col
+}
+.select{
+    @apply flex w-full items-center p-2 pl-2 border border-gray-300 rounded-md relative focus:outline-none
+}
+.listSelect{
+    @apply border w-full border-gray-500 focus:outline-none bg-gray-200
+}
+.multiSelect{
+    @apply flex justify-center items-center px-3 font-medium border border-gray-300 rounded-md bg-blue-300 mx-1 cursor-pointer
+}
+.selected{
+    @apply px-3 hover:bg-gray-400 cursor-pointer
+}

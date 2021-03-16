@@ -1,0 +1,10 @@
+export const DELETE_DEPARTMENT = 'DELETE_DEPARTMENT';
+export const TABLE_NAME = 'departments';
+export const GET_DEPARTMENT = 'GET_DEPARTMENT';
+export const UPDATE_DEPARTMENT = 'UPDATE_DEPARTMENT';
+export const ADD_DEPARTMENT = 'ADD_DEPARTMENT';
+export const TECH_STACK = 'techStack';
+export const ADD_DATA_TECH_STACK = 'ADD_DATA_TECH_STACK';
+export const STAFF = 'staffs';
+export const PROJECT = 'projects';
+export const LIMIT = 3;
