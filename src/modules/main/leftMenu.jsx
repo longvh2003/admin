@@ -7,7 +7,7 @@ export const LeftMenu = () => {
   const history = useHistory();
   return (
     <div>
-      <div className='w-12 px-9 py-4 md:grid md:grid-cols-4 md:px-3 md:py-4'>
+      <div className='px-9 py-4 md:grid md:grid-cols-4 md:px-3'>
         <div className='col-span-1'>
           <img
             src={Avatar}
