@@ -1,24 +1,27 @@
 export const getData = table => {
-  const data = localStorage.getItem(table);
-  return JSON.parse(data);
+  return JSON.parse(localStorage.getItem(table));
 };
 export const delData = (index, table) => {
-  let data = JSON.parse(localStorage.getItem(table));
+  let data = getData(table);
   data = data.filter(element => element != data[index]);
   localStorage.setItem(table, JSON.stringify(data));
 };
 export const updateData = (index, detail, table) => {
-  let data = JSON.parse(localStorage.getItem(table));
+  let data = getData(table);
   data[index] = detail;
   localStorage.setItem(table, JSON.stringify(data));
 };
 export const addData = (detail, table) => {
-  let data = JSON.parse(localStorage.getItem(table));
-  data.push(detail);
+  let data = getData(table);
+  data.unshift(detail);
   localStorage.setItem(table, JSON.stringify(data));
 };
-export const getDetail = (detail, table) => {
-  let data = JSON.parse(localStorage.getItem(table));
+export const getIndex = (detail, table) => {
+  let data = getData(table);
   let tmp = data.filter(element => element.name === detail);
   return data.indexOf(tmp[0]);
+};
+export const getDetail = (index, table) => {
+  let data = getData(table);
+  return data[index];
 };

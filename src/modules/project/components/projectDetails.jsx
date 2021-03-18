@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { delAProject } from '../project.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData, getDetail } from '../../../utils/utils';
+import { getData, getIndex } from '../../../utils/utils';
 import { EditProject } from './EditProject';
 
 export const ProjectDetail = () => {
@@ -29,7 +29,7 @@ export const ProjectDetail = () => {
     history.push('/project');
   };
   const handleDetail = (element, TABLE) => {
-    const index = getDetail(element, TABLE);
+    const index = getIndex(element, TABLE);
     switch (TABLE) {
       case TYPE_PROJECT:
         history.push(`/type-project/${index}`);

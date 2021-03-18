@@ -77,6 +77,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
         techStacks: techStacks,
         projects: projects,
       };
+      console.log(date);
       if (data.filter(element => JSON.stringify(element) === JSON.stringify(staff)).length === 0) {
         dispatch(updateStaff(index, staff, TABLE_NAME));
         cancel(true);
@@ -100,6 +101,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
               name='name'
               value={name}
               onChange={handleChangeName}
+              autoFocus
             />
           </div>
           <div className='groupData'>

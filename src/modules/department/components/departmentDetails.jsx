@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { delADepartment } from '../department.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData, getDetail } from '../../../utils/utils';
+import { getData, getIndex } from '../../../utils/utils';
 import { EditDepartment } from './EditDepartment';
 
 export const DepartmentDetail = () => {
@@ -22,7 +22,7 @@ export const DepartmentDetail = () => {
     history.push('/department');
   };
   const handleDetail = (element, TABLE) => {
-    const index = getDetail(element, TABLE);
+    const index = getIndex(element, TABLE);
     switch (TABLE) {
       case TECH_STACK:
         history.push(`/tech-stack/${index}`);

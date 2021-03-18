@@ -76,7 +76,11 @@ export const DepartmentCreate = () => {
     if (detail.name === '' || detail.description === '') {
       alert('Please fill in missing information!!');
     } else {
-      if (data.filter(element => JSON.stringify(element) === JSON.stringify(detail)).length === 0) {
+      if (
+        data.filter(
+          element => element.name === detail.name && element.description === detail.description,
+        ).length === 0
+      ) {
         dispatch(addDepartment(detail, TABLE_NAME));
         history.push('department');
       } else {
@@ -99,6 +103,7 @@ export const DepartmentCreate = () => {
             name='name'
             value={name}
             onChange={handleChangeName}
+            autoFocus
           />
         </div>
         <div className='groupData'>

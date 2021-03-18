@@ -115,7 +115,9 @@ export const EditProject = ({ index, detail, cancel }) => {
         staffs: staffs,
       };
       if (
-        data.filter(element => JSON.stringify(element) === JSON.stringify(department)).length === 0
+        data.filter(
+          element => element.name === detail.name && element.description === detail.description,
+        ).length === 0
       ) {
         dispatch(updateProject(index, department, TABLE_NAME));
         cancel(true);
@@ -141,6 +143,7 @@ export const EditProject = ({ index, detail, cancel }) => {
             name='name'
             value={name}
             onChange={handleChangeName}
+            autoFocus
           />
         </div>
         <div className='groupData'>

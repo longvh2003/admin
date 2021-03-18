@@ -98,6 +98,7 @@ export const StaffCreate = () => {
               name='name'
               value={name}
               onChange={handleChangeName}
+              autoFocus
             />
           </div>
           <div className='groupData'>

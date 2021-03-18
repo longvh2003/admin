@@ -35,8 +35,9 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
         status: status,
       };
       if (
-        data.filter(element => JSON.stringify(element) === JSON.stringify(statusProject)).length ===
-        0
+        data.filter(
+          element => element.name === detail.name && element.description === detail.description,
+        ).length === 0
       ) {
         dispatch(updateStatusProject(index, statusProject, TABLE_NAME));
         cancel(true);
@@ -57,6 +58,7 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
             name='name'
             value={name}
             onChange={handleChangeName}
+            autoFocus
           />
         </div>
         <div className='groupData'>

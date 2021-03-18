@@ -40,7 +40,11 @@ export const TypeProjectCreate = () => {
         priority: priority,
         status: status,
       };
-      if (data.filter(element => JSON.stringify(element) === JSON.stringify(detail)).length === 0) {
+      if (
+        data.filter(
+          element => element.name === detail.name && element.description === detail.description,
+        ).length === 0
+      ) {
         dispatch(addTypeProject(detail, TABLE_NAME));
         history.push('type-project');
       } else {
@@ -60,6 +64,7 @@ export const TypeProjectCreate = () => {
             name='name'
             value={name}
             onChange={handleChangeName}
+            autoFocus
           />
         </div>
         <div className='groupData'>

@@ -36,7 +36,9 @@ export const EditTechStack = ({ index, detail, cancel }) => {
         status: status,
       };
       if (
-        data.filter(element => JSON.stringify(element) === JSON.stringify(techStack)).length === 0
+        data.filter(
+          element => element.name === detail.name && element.description === detail.description,
+        ).length === 0
       ) {
         dispatch(updateTechStack(index, techStack, TABLE_NAME));
         cancel(true);
@@ -57,6 +59,7 @@ export const EditTechStack = ({ index, detail, cancel }) => {
             name='name'
             value={name}
             onChange={handleChangeName}
+            autoFocus
           />
         </div>
         <div className='groupData'>

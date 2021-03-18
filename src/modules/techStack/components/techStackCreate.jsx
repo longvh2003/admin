@@ -34,7 +34,11 @@ export const TechStackCreate = () => {
         description: description,
         status: status,
       };
-      if (data.filter(element => JSON.stringify(element) === JSON.stringify(detail)).length === 0) {
+      if (
+        data.filter(
+          element => element.name === detail.name && element.description === detail.description,
+        ).length === 0
+      ) {
         dispatch(addTechStack(detail, TABLE_NAME));
         history.push('tech-stack');
       } else {
@@ -54,6 +58,7 @@ export const TechStackCreate = () => {
             name='name'
             value={name}
             onChange={handleChangeName}
+            autoFocus
           />
         </div>
         <div className='groupData'>
