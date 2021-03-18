@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { TABLE_NAME } from '../staff.constants';
+import { TABLE_NAME, TECH_STACK, PROJECT } from '../staff.constants';
 import { useDispatch } from 'react-redux';
 import { delAStaff } from '../staff.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData } from '../../../utils/utils';
+import { getData, getDetail } from '../../../utils/utils';
 import { EditStaff } from './EditStaff';
 
 export const StaffDetail = () => {
@@ -21,17 +21,33 @@ export const StaffDetail = () => {
     dispatch(delAStaff(index, TABLE_NAME));
     history.push('/staff');
   };
+  const handleDetail = (element, TABLE) => {
+    const index = getDetail(element, TABLE);
+    switch (TABLE) {
+      case TECH_STACK:
+        history.push(`/tech-stack/${index}`);
+        break;
+      case PROJECT:
+        history.push(`/project/${index}`);
+        break;
+    }
+  };
   return isUpdate ? (
     <div>
       <div className='header'>DETAIL</div>
+      <div className='my-3 mx-10'>
+        <button onClick={() => history.push('/staff')} className='btn'>
+          Back
+        </button>
+      </div>
       <div className='containerDetail'>
         <div className='groupData'>
           <label className='leading-loose'>Name :</label>
           <input type='text' className='inputDetail' value={detail.name} readOnly />
         </div>
         <div className='groupData'>
-          <label className='leading-loose'>Email :</label>
-          <input type='text' className='inputDetail' value={detail.email} readOnly />
+          <label className='leading-loose'>Date of Birth :</label>
+          <input type='text' className='inputDetail' value={detail.date} readOnly />
         </div>
         <div className='groupData'>
           <label className='leading-loose'>Id :</label>
@@ -51,7 +67,7 @@ export const StaffDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
                       <i className='fas fa-atlas pr-2'></i>
                       {element}
                     </li>
@@ -66,7 +82,7 @@ export const StaffDetail = () => {
             <ul>
               {detail.projects !== undefined
                 ? detail.projects.map((element, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={() => handleDetail(element, PROJECT)}>
                       <i className='fas fa-tasks pr-2'></i>
                       {element}
                     </li>

@@ -24,6 +24,11 @@ export const TypeProjectDetail = () => {
   return isUpdate ? (
     <div>
       <div className='header'>DETAIL</div>
+      <div className='my-3 mx-10'>
+        <button onClick={() => history.push('/type-project')} className='btn'>
+          Back
+        </button>
+      </div>
       <div className='containerDetail'>
         <div className='groupData'>
           <label className='leading-loose'>Name :</label>

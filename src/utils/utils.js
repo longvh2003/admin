@@ -17,3 +17,8 @@ export const addData = (detail, table) => {
   data.push(detail);
   localStorage.setItem(table, JSON.stringify(data));
 };
+export const getDetail = (detail, table) => {
+  let data = JSON.parse(localStorage.getItem(table));
+  let tmp = data.filter(element => element.name === detail);
+  return data.indexOf(tmp[0]);
+};

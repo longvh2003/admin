@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import Avatar from '../../assets/images/avatar.jpg';
+import { UserDetail } from '../../pages/main/user';
 
 export const LeftMenu = () => {
-  const history = useHistory();
+  const [user, setUser] = useState(false);
   return (
     <div>
-      <div className='px-9 py-4 md:grid md:grid-cols-4 md:px-3'>
+      <div className='px-9 py-4 md:grid lg:grid-cols-4 lg:px-3'>
         <div className='col-span-1'>
           <img
             src={Avatar}
             alt='Miracle'
             className='imageLeftMenu'
-            onClick={() => history.push('/login')}
+            onClick={() => setUser(!user)}
           />
         </div>
-        <div className='col-span-3 grid grid-rows-2 py-1 hidden md:block'>
+        <div className='col-span-3 grid grid-rows-2 py-1 hidden lg:block'>
           <p className='row-span-1 px-2'>Amer Al-Barkawi</p>
           <div className='row-span-1'>
             <i className='fas fa-circle statusLeftMenu'></i>Online
           </div>
         </div>
       </div>
+      {user ? <UserDetail /> : null}
       <div className='headerLeftMenu invisible md:visible'>CATEGORY</div>
       <div>
         <button className='btnLeftMenu'>

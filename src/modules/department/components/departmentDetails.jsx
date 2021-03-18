@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { TABLE_NAME } from '../department.constants';
+import { PROJECT, STAFF, TABLE_NAME, TECH_STACK } from '../department.constants';
 import { useDispatch } from 'react-redux';
 import { delADepartment } from '../department.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData } from '../../../utils/utils';
+import { getData, getDetail } from '../../../utils/utils';
 import { EditDepartment } from './EditDepartment';
 
 export const DepartmentDetail = () => {
@@ -21,9 +21,28 @@ export const DepartmentDetail = () => {
     dispatch(delADepartment(index, TABLE_NAME));
     history.push('/department');
   };
+  const handleDetail = (element, TABLE) => {
+    const index = getDetail(element, TABLE);
+    switch (TABLE) {
+      case TECH_STACK:
+        history.push(`/tech-stack/${index}`);
+        break;
+      case STAFF:
+        history.push(`/staff/${index}`);
+        break;
+      case PROJECT:
+        history.push(`/project/${index}`);
+        break;
+    }
+  };
   return isUpdate ? (
     <div>
       <div className='header'>DETAIL</div>
+      <div className='my-3 mx-10'>
+        <button onClick={() => history.push('/department')} className='btn'>
+          Back
+        </button>
+      </div>
       <div className='containerDetail'>
         <div className='groupData'>
           <label className='leading-loose'>Name :</label>
@@ -39,7 +58,7 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
                       <i className='fas fa-atlas pr-2'></i>
                       {element}
                     </li>
@@ -54,7 +73,7 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.staffs !== undefined
                 ? detail.staffs.map((element, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={() => handleDetail(element, STAFF)}>
                       <i className='fas fa-user pr-2'></i>
                       {element}
                     </li>
@@ -69,7 +88,7 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.projects !== undefined
                 ? detail.projects.map((element, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={() => handleDetail(element, PROJECT)}>
                       <i className='fas fa-tasks pr-2'></i>
                       {element}
                     </li>

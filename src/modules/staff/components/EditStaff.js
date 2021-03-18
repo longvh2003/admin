@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { handleOutsideClick } from '../../../services/handleOutsideClick';
 import { getData } from '../../../utils/utils';
 import { TABLE_NAME, TECH_STACK, PROJECT } from '../staff.constants';
 import { updateStaff } from '../staff.services';
 
 export const EditStaff = ({ index, detail, cancel }) => {
   const [name, setName] = useState(detail.name);
-  const [email, setEmail] = useState(detail.email);
+  const [date, setDate] = useState(detail.date);
   const [id, setId] = useState(detail.id);
   const [phoneNumber, setPhoneNumber] = useState(detail.phoneNumber);
   const [address, setAddress] = useState(detail.address);
@@ -16,12 +17,14 @@ export const EditStaff = ({ index, detail, cancel }) => {
   const [isOpenTechStack, setIsOpenTechStack] = useState(false);
   const listProjects = getData(PROJECT);
   const [isOpenProject, setIsOpenProject] = useState(false);
+  const refTechStack = useRef();
+  const refProject = useRef();
   const handleChangeName = e => {
     setName(e.target.value);
   };
 
-  const handleChangeEmail = e => {
-    setEmail(e.target.value);
+  const handleChangeDate = e => {
+    setDate(e.target.value);
   };
   const handleChangeId = e => {
     setId(e.target.value);
@@ -57,17 +60,17 @@ export const EditStaff = ({ index, detail, cancel }) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
-    if (name === '' || email === '' || id === '' || phoneNumber === '' || address === '') {
+    if (name === '' || date === '' || id === '' || phoneNumber === '' || address === '') {
       alert('Please fill in missing information!!');
     } else {
       name === undefined ? setName(detail.name) : null;
-      email === undefined ? setEmail(detail.email) : null;
+      date === undefined ? setDate(detail.dateOfBirth) : null;
       id === undefined ? setId(detail.id) : null;
       phoneNumber === undefined ? setPhoneNumber(detail.phoneNumber) : null;
       address === undefined ? setAddress(detail.address) : null;
       let staff = {
         name: name,
-        email: email,
+        date: date,
         id: id,
         phoneNumber: phoneNumber,
         address: address,
@@ -82,6 +85,8 @@ export const EditStaff = ({ index, detail, cancel }) => {
       }
     }
   };
+  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
+  handleOutsideClick(refProject, () => setIsOpenProject(false));
   return (
     <div>
       <div className='header'>DETAIL</div>
@@ -98,13 +103,13 @@ export const EditStaff = ({ index, detail, cancel }) => {
             />
           </div>
           <div className='groupData'>
-            <label className='leading-loose'>Email :</label>
+            <label className='leading-loose'>Date of Birth :</label>
             <input
-              type='text'
+              type='date'
               className='inputDetail'
-              name='email'
-              value={email}
-              onChange={handleChangeEmail}
+              name='date'
+              value={date}
+              onChange={handleChangeDate}
             />
           </div>
           <div className='groupData'>
@@ -144,6 +149,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
+              ref={refTechStack}
             >
               <div className='flex flex-auto flex-wrap'>
                 {techStacks.map((element, index) => (
@@ -187,6 +193,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenProject(!isOpenProject);
               }}
+              ref={refProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {projects.map((element, index) => (

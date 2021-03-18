@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { handleOutsideClick } from '../../../services/handleOutsideClick';
 import { getData } from '../../../utils/utils';
 import {
   TABLE_NAME,
@@ -29,6 +30,11 @@ export const EditProject = ({ index, detail, cancel }) => {
   const [isOpenDepartment, setIsOpenDepartment] = useState(false);
   const listStaffs = getData(STAFF);
   const [isOpenStaff, setIsOpenStaff] = useState(false);
+  const refTypeProject = useRef();
+  const refStatusProject = useRef();
+  const refTechStack = useRef();
+  const refDepartment = useRef();
+  const refStaff = useRef();
   const handleChangeName = e => {
     setName(e.target.value);
   };
@@ -118,6 +124,11 @@ export const EditProject = ({ index, detail, cancel }) => {
       }
     }
   };
+  handleOutsideClick(refTypeProject, () => setIsOpenTypeProject(false));
+  handleOutsideClick(refStatusProject, () => setIsOpenStatusProject(false));
+  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
+  handleOutsideClick(refDepartment, () => setIsOpenDepartment(false));
+  handleOutsideClick(refStaff, () => setIsOpenStaff(false));
   return (
     <div>
       <div className='header'>CREATE</div>
@@ -150,6 +161,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenTypeProject(!isOpenTypeProject);
               }}
+              ref={refTypeProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {typeProjects.map((element, index) => (
@@ -193,6 +205,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenStatusProject(!isOpenStatusProject);
               }}
+              ref={refStatusProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {statusProjects.map((element, index) => (
@@ -236,6 +249,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
+              ref={refTechStack}
             >
               <div className='flex flex-auto flex-wrap'>
                 {techStacks.map((element, index) => (
@@ -279,6 +293,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenDepartment(!isOpenDepartment);
               }}
+              ref={refDepartment}
             >
               <div className='flex flex-auto flex-wrap'>
                 {departments.map((element, index) => (
@@ -322,6 +337,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenStaff(!isOpenStaff);
               }}
+              ref={refStaff}
             >
               <div className='flex flex-auto flex-wrap'>
                 {staffs.map((element, index) => (

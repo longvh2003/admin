@@ -24,7 +24,7 @@ function App() {
         <Route
           render={({ location }) => {
             return (
-              <div className='grid grid-cols-6 h-screen'>
+              <div className='grid grid-cols-6'>
                 <div className='col-span-1 containerLeftMenu'>
                   <LeftMenus />
                 </div>

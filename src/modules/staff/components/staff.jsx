@@ -45,7 +45,7 @@ export const Staff = ({ page }) => {
         </td>
         <td className='py-3 px-6'>
           <div className='dataTable'>
-            <span>{element.email}</span>
+            <span>{element.date}</span>
           </div>
         </td>
       </tr>
@@ -63,7 +63,7 @@ export const Staff = ({ page }) => {
           <tr className='rowHeader'>
             <th className='headerTable'>No.</th>
             <th className='headerTable'>Name</th>
-            <th className='headerTable'>Email</th>
+            <th className='headerTable'>Date of Birth</th>
           </tr>
         </thead>
         <tbody>{listElement}</tbody>

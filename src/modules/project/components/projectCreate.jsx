@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   TABLE_NAME,
@@ -11,6 +11,7 @@ import {
 import { addProject } from '../project.services';
 import { useHistory } from 'react-router-dom';
 import { getData } from '../../../utils/utils';
+import { handleOutsideClick } from '../../../services/handleOutsideClick';
 
 export const ProjectCreate = () => {
   const [name, setName] = useState('');
@@ -30,6 +31,11 @@ export const ProjectCreate = () => {
   const [isOpenDepartment, setIsOpenDepartment] = useState(false);
   const listStaffs = getData(STAFF);
   const [isOpenStaff, setIsOpenStaff] = useState(false);
+  const refTypeProject = useRef();
+  const refStatusProject = useRef();
+  const refTechStack = useRef();
+  const refDepartment = useRef();
+  const refStaff = useRef();
   const handleChangeName = e => {
     setName(e.target.value);
   };
@@ -117,6 +123,11 @@ export const ProjectCreate = () => {
       }
     }
   };
+  handleOutsideClick(refTypeProject, () => setIsOpenTypeProject(false));
+  handleOutsideClick(refStatusProject, () => setIsOpenStatusProject(false));
+  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
+  handleOutsideClick(refDepartment, () => setIsOpenDepartment(false));
+  handleOutsideClick(refStaff, () => setIsOpenStaff(false));
   return (
     <div>
       <div className='header'>CREATE</div>
@@ -149,6 +160,7 @@ export const ProjectCreate = () => {
               onClick={() => {
                 setIsOpenTypeProject(!isOpenTypeProject);
               }}
+              ref={refTypeProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {typeProjects.map((element, index) => (
@@ -192,6 +204,7 @@ export const ProjectCreate = () => {
               onClick={() => {
                 setIsOpenStatusProject(!isOpenStatusProject);
               }}
+              ref={refStatusProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {statusProjects.map((element, index) => (
@@ -235,6 +248,7 @@ export const ProjectCreate = () => {
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
+              ref={refTechStack}
             >
               <div className='flex flex-auto flex-wrap'>
                 {techStacks.map((element, index) => (
@@ -278,6 +292,7 @@ export const ProjectCreate = () => {
               onClick={() => {
                 setIsOpenDepartment(!isOpenDepartment);
               }}
+              ref={refDepartment}
             >
               <div className='flex flex-auto flex-wrap'>
                 {departments.map((element, index) => (
@@ -321,6 +336,7 @@ export const ProjectCreate = () => {
               onClick={() => {
                 setIsOpenStaff(!isOpenStaff);
               }}
+              ref={refStaff}
             >
               <div className='flex flex-auto flex-wrap'>
                 {staffs.map((element, index) => (

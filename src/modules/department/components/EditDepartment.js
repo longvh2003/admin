@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { handleOutsideClick } from '../../../services/handleOutsideClick';
 import { getData } from '../../../utils/utils';
 import { TABLE_NAME, TECH_STACK, STAFF, PROJECT } from '../department.constants';
 import { updateDepartment } from '../department.services';
@@ -16,6 +17,9 @@ export const EditDepartment = ({ index, detail, cancel }) => {
   const [isOpenStaff, setIsOpenStaff] = useState(false);
   const listProjects = getData(PROJECT);
   const [isOpenProject, setIsOpenProject] = useState(false);
+  const refTechStack = useRef();
+  const refStaff = useRef();
+  const refProject = useRef();
   const handleChangeName = e => {
     setName(e.target.value);
   };
@@ -81,6 +85,9 @@ export const EditDepartment = ({ index, detail, cancel }) => {
       }
     }
   };
+  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
+  handleOutsideClick(refStaff, () => setIsOpenStaff(false));
+  handleOutsideClick(refProject, () => setIsOpenProject(false));
   return (
     <div>
       <div className='header'>DETAIL</div>
@@ -112,6 +119,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             onClick={() => {
               setIsOpenTechStack(!isOpenTechStack);
             }}
+            ref={refTechStack}
           >
             <div className='flex flex-auto flex-wrap'>
               {techStacks.map((element, index) => (
@@ -155,6 +163,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             onClick={() => {
               setIsOpenStaff(!isOpenStaff);
             }}
+            ref={refStaff}
           >
             <div className='flex flex-auto flex-wrap'>
               {staffs.map((element, index) => (
@@ -198,6 +207,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             onClick={() => {
               setIsOpenProject(!isOpenProject);
             }}
+            ref={refProject}
           >
             <div className='flex flex-auto flex-wrap'>
               {projects.map((element, index) => (

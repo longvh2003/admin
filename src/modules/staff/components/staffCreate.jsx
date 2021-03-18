@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TABLE_NAME, TECH_STACK, PROJECT } from '../staff.constants';
 import { addStaff } from '../staff.services';
 import { useHistory } from 'react-router-dom';
 import { getData } from '../../../utils/utils';
+import { handleOutsideClick } from '../../../services/handleOutsideClick';
 
 export const StaffCreate = () => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
   const [id, setId] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
@@ -17,12 +18,14 @@ export const StaffCreate = () => {
   const [isOpenTechStack, setIsOpenTechStack] = useState(false);
   const listProjects = getData(PROJECT);
   const [isOpenProject, setIsOpenProject] = useState(false);
+  const refTechStack = useRef();
+  const refProject = useRef();
   const handleChangeName = e => {
     setName(e.target.value);
   };
 
-  const handleChangeEmail = e => {
-    setEmail(e.target.value);
+  const handleChangeDate = e => {
+    setDate(e.target.value);
   };
   const handleChangeId = e => {
     setId(e.target.value);
@@ -61,7 +64,7 @@ export const StaffCreate = () => {
   const handleAdd = () => {
     let detail = {
       name: name,
-      email: email,
+      date: date,
       id: id,
       phoneNumber: phoneNumber,
       address: address,
@@ -80,6 +83,8 @@ export const StaffCreate = () => {
       }
     }
   };
+  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
+  handleOutsideClick(refProject, () => setIsOpenProject(false));
   return (
     <div>
       <div className='header'>DETAIL</div>
@@ -96,13 +101,13 @@ export const StaffCreate = () => {
             />
           </div>
           <div className='groupData'>
-            <label className='leading-loose'>Email :</label>
+            <label className='leading-loose'>Date of Birth :</label>
             <input
-              type='text'
+              type='date'
               className='inputDetail'
-              name='email'
-              value={email}
-              onChange={handleChangeEmail}
+              name='date'
+              value={date}
+              onChange={handleChangeDate}
             />
           </div>
           <div className='groupData'>
@@ -142,6 +147,7 @@ export const StaffCreate = () => {
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
+              ref={refTechStack}
             >
               <div className='flex flex-auto flex-wrap'>
                 {techStacks.map((element, index) => (
@@ -185,6 +191,7 @@ export const StaffCreate = () => {
               onClick={() => {
                 setIsOpenProject(!isOpenProject);
               }}
+              ref={refProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {projects.map((element, index) => (
