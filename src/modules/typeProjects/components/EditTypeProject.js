@@ -28,13 +28,12 @@ export const EditTypeProject = ({ index, detail, cancel }) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
+    let listData = data.filter(
+      element => element.name !== detail.name && element.description !== detail.description,
+    );
     if (name === '' || description === '') {
       alert('Please fill in missing information!!');
     } else {
-      name === undefined ? setName(detail.name) : null;
-      description === undefined ? setDescription(detail.description) : null;
-      priority === undefined ? setPriority(detail.priorityNumber) : null;
-      status === undefined ? setStatus(detail.status) : null;
       let typeProject = {
         name: name,
         description: description,
@@ -42,8 +41,9 @@ export const EditTypeProject = ({ index, detail, cancel }) => {
         status: status,
       };
       if (
-        data.filter(
-          element => element.name === detail.name && element.description === detail.description,
+        listData.filter(
+          element =>
+            element.name === typeProject.name && element.description === typeProject.description,
         ).length === 0
       ) {
         dispatch(updateTypeProject(index, typeProject, TABLE_NAME));

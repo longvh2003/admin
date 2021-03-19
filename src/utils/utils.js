@@ -3,7 +3,7 @@ export const getData = table => {
 };
 export const delData = (index, table) => {
   let data = getData(table);
-  data = data.filter(element => element != data[index]);
+  data = data.filter(element => element.id !== index);
   localStorage.setItem(table, JSON.stringify(data));
 };
 export const updateData = (index, detail, table) => {

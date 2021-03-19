@@ -31,7 +31,7 @@ export const Customer = ({ page }) => {
       <tr
         className='rowTable'
         key={index + indexPage * LIMIT}
-        onClick={() => handleDetail(index + indexPage * LIMIT)}
+        onClick={() => handleDetail(element.id)}
       >
         <td className='py-3 px-6'>
           <div className='dataTable'>

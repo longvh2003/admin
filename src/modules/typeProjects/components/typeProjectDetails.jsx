@@ -15,7 +15,7 @@ export const TypeProjectDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const data = getData(TABLE_NAME);
-    setDetail(data[id]);
+    setDetail(data.filter(element => element.id === id)[0]);
   }, [isUpdate]);
   const deleteTypeProject = (index, TABLE_NAME) => {
     dispatch(delATypeProject(index, TABLE_NAME));

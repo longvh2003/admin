@@ -33,6 +33,7 @@ export const TechStackCreate = () => {
         name: name,
         description: description,
         status: status,
+        id: Math.random().toString(36).substring(4),
       };
       if (
         data.filter(

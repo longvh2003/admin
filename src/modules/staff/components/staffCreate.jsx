@@ -83,8 +83,10 @@ export const StaffCreate = () => {
       }
     }
   };
-  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
-  handleOutsideClick(refProject, () => setIsOpenProject(false));
+  handleOutsideClick(refTechStack, () =>
+    isOpenTechStack === true ? setIsOpenTechStack(false) : null,
+  );
+  handleOutsideClick(refProject, () => (isOpenProject === true ? setIsOpenProject(false) : null));
   return (
     <div>
       <div className='header'>DETAIL</div>
@@ -148,7 +150,6 @@ export const StaffCreate = () => {
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
-              ref={refTechStack}
             >
               <div className='flex flex-auto flex-wrap'>
                 {techStacks.map((element, index) => (
@@ -166,7 +167,7 @@ export const StaffCreate = () => {
               </div>
             </div>
           </div>
-          <div className={isOpenTechStack === true ? 'listSelect' : null}>
+          <div className={isOpenTechStack === true ? 'listSelect' : null} ref={refTechStack}>
             {isOpenTechStack
               ? listTechStacks !== undefined
                 ? listTechStacks.map((element, index) => (
@@ -192,7 +193,6 @@ export const StaffCreate = () => {
               onClick={() => {
                 setIsOpenProject(!isOpenProject);
               }}
-              ref={refProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {projects.map((element, index) => (
@@ -210,7 +210,7 @@ export const StaffCreate = () => {
               </div>
             </div>
           </div>
-          <div className={isOpenProject === true ? 'listSelect' : null}>
+          <div className={isOpenProject === true ? 'listSelect' : null} ref={refProject}>
             {isOpenProject
               ? listProjects !== undefined
                 ? listProjects.map((element, index) => (

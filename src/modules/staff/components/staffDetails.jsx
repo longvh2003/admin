@@ -50,7 +50,7 @@ export const StaffDetail = () => {
           <input type='text' className='inputDetail' value={detail.date} readOnly />
         </div>
         <div className='groupData'>
-          <label className='leading-loose'>Id :</label>
+          <label className='leading-loose'>Identification Number :</label>
           <input type='text' className='inputDetail' value={detail.id} readOnly />
         </div>
         <div className='groupData'>

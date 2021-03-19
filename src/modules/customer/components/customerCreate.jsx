@@ -39,6 +39,7 @@ export const CustomerCreate = () => {
         description: description,
         priority: priority,
         status: status,
+        id: Math.random().toString(36).substring(4),
       };
       if (
         data.filter(

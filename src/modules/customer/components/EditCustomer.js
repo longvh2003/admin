@@ -28,13 +28,12 @@ export const EditCustomer = ({ index, detail, cancel }) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
+    let listData = data.filter(
+      element => element.name !== detail.name && element.description !== detail.description,
+    );
     if (name === '' || description === '' || priority === 'Choose..' || status === 'Choose..') {
       alert('Please fill in missing information!!');
     } else {
-      name !== undefined ? (detail.name = name) : null;
-      description !== undefined ? (detail.description = description) : null;
-      priority !== undefined ? (detail.priority = priority) : null;
-      status !== undefined ? (detail.status = status) : null;
       let customer = {
         name: name,
         description: description,
@@ -42,8 +41,8 @@ export const EditCustomer = ({ index, detail, cancel }) => {
         status: status,
       };
       if (
-        data.filter(
-          element => element.name === detail.name && element.description === detail.description,
+        listData.filter(
+          element => element.name === customer.name && element.description === customer.description,
         ).length === 0
       ) {
         dispatch(updateCustomer(index, customer, TABLE_NAME));

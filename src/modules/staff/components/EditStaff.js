@@ -59,15 +59,9 @@ export const EditStaff = ({ index, detail, cancel }) => {
   };
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    const data = getData(TABLE_NAME);
     if (name === '' || date === '' || id === '' || phoneNumber === '' || address === '') {
       alert('Please fill in missing information!!');
     } else {
-      name === undefined ? setName(detail.name) : null;
-      date === undefined ? setDate(detail.dateOfBirth) : null;
-      id === undefined ? setId(detail.id) : null;
-      phoneNumber === undefined ? setPhoneNumber(detail.phoneNumber) : null;
-      address === undefined ? setAddress(detail.address) : null;
       let staff = {
         name: name,
         date: date,
@@ -77,17 +71,14 @@ export const EditStaff = ({ index, detail, cancel }) => {
         techStacks: techStacks,
         projects: projects,
       };
-      console.log(date);
-      if (data.filter(element => JSON.stringify(element) === JSON.stringify(staff)).length === 0) {
-        dispatch(updateStaff(index, staff, TABLE_NAME));
-        cancel(true);
-      } else {
-        alert('Type project already exist!!!');
-      }
+      dispatch(updateStaff(index, staff, TABLE_NAME));
+      cancel(true);
     }
   };
-  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
-  handleOutsideClick(refProject, () => setIsOpenProject(false));
+  handleOutsideClick(refTechStack, () =>
+    isOpenTechStack === true ? setIsOpenTechStack(false) : null,
+  );
+  handleOutsideClick(refProject, () => (isOpenProject === true ? setIsOpenProject(false) : null));
   return (
     <div>
       <div className='header'>DETAIL</div>
@@ -115,7 +106,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
             />
           </div>
           <div className='groupData'>
-            <label className='leading-loose'>Id :</label>
+            <label className='leading-loose'>Identification Number :</label>
             <input
               type='text'
               className='inputDetail'
@@ -151,7 +142,6 @@ export const EditStaff = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
-              ref={refTechStack}
             >
               <div className='flex flex-auto flex-wrap'>
                 {techStacks.map((element, index) => (
@@ -169,7 +159,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div className={isOpenTechStack === true ? 'listSelect' : null}>
+          <div className={isOpenTechStack === true ? 'listSelect' : null} ref={refTechStack}>
             {isOpenTechStack
               ? listTechStacks !== undefined
                 ? listTechStacks.map((element, index) => (
@@ -195,7 +185,6 @@ export const EditStaff = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenProject(!isOpenProject);
               }}
-              ref={refProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {projects.map((element, index) => (
@@ -213,7 +202,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div className={isOpenProject === true ? 'listSelect' : null}>
+          <div className={isOpenProject === true ? 'listSelect' : null} ref={refProject}>
             {isOpenProject
               ? listProjects !== undefined
                 ? listProjects.map((element, index) => (

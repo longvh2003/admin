@@ -25,14 +25,13 @@ export const TechStack = ({ page }) => {
   const nextPage = () => {
     indexPage < maxPage - 1 ? setIndexPage(indexPage + 1) : null;
   };
-  console.log(indexPage, maxPage);
   const listElement = techStacks
     .filter((element, index) => index >= indexPage * LIMIT && index < (indexPage + 1) * LIMIT)
     .map((element, index) => (
       <tr
         className='rowTable'
         key={index + indexPage * LIMIT}
-        onClick={() => handleDetail(index + indexPage * LIMIT)}
+        onClick={() => handleDetail(element.id)}
       >
         <td className='py-3 px-6'>
           <div className='dataTable'>

@@ -15,10 +15,10 @@ export const CustomerDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const data = getData(TABLE_NAME);
-    setDetail(data[id]);
+    setDetail(data.filter(element => element.id === id)[0]);
   }, [isUpdate]);
-  const deleteCustomer = (index, TABLE_NAME) => {
-    dispatch(delACustomer(index, TABLE_NAME));
+  const deleteCustomer = (id, TABLE_NAME) => {
+    dispatch(delACustomer(id, TABLE_NAME));
     history.push('/customer');
   };
   return isUpdate ? (

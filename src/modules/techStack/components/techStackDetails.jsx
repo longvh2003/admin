@@ -15,7 +15,7 @@ export const TechStackDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const data = getData(TABLE_NAME);
-    setDetail(data[id]);
+    setDetail(data.filter(element => element.id === id)[0]);
   }, [isUpdate]);
   const deleteTechStack = (index, TABLE_NAME) => {
     dispatch(delATechStack(index, TABLE_NAME));

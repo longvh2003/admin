@@ -63,11 +63,12 @@ export const EditDepartment = ({ index, detail, cancel }) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
+    let listData = data.filter(
+      element => element.name !== detail.name && element.description !== detail.description,
+    );
     if (name === '' || description === '') {
       alert('Please fill in missing information!!');
     } else {
-      name === undefined ? setName(detail.name) : null;
-      description === undefined ? setDescription(detail.name) : null;
       let department = {
         name: name,
         description: description,
@@ -76,7 +77,10 @@ export const EditDepartment = ({ index, detail, cancel }) => {
         projects: projects,
       };
       if (
-        data.filter(element => JSON.stringify(element) === JSON.stringify(department)).length === 0
+        listData.filter(
+          element =>
+            element.name === department.name && element.description === department.description,
+        ).length === 0
       ) {
         dispatch(updateDepartment(index, department, TABLE_NAME));
         cancel(true);
@@ -85,9 +89,11 @@ export const EditDepartment = ({ index, detail, cancel }) => {
       }
     }
   };
-  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
-  handleOutsideClick(refStaff, () => setIsOpenStaff(false));
-  handleOutsideClick(refProject, () => setIsOpenProject(false));
+  handleOutsideClick(refTechStack, () =>
+    isOpenTechStack === true ? setIsOpenTechStack(false) : null,
+  );
+  handleOutsideClick(refStaff, () => (isOpenStaff === true ? setIsOpenStaff(false) : null));
+  handleOutsideClick(refProject, () => (isOpenProject === true ? setIsOpenProject(false) : null));
   return (
     <div>
       <div className='header'>DETAIL</div>
@@ -119,7 +125,6 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             onClick={() => {
               setIsOpenTechStack(!isOpenTechStack);
             }}
-            ref={refTechStack}
           >
             <div className='flex flex-auto flex-wrap'>
               {techStacks.map((element, index) => (
@@ -137,7 +142,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             </div>
           </div>
         </div>
-        <div className={isOpenTechStack === true ? 'listSelect' : null}>
+        <div className={isOpenTechStack === true ? 'listSelect' : null} ref={refTechStack}>
           {isOpenTechStack
             ? listTechStacks !== undefined
               ? listTechStacks.map((element, index) => (
@@ -163,7 +168,6 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             onClick={() => {
               setIsOpenStaff(!isOpenStaff);
             }}
-            ref={refStaff}
           >
             <div className='flex flex-auto flex-wrap'>
               {staffs.map((element, index) => (
@@ -181,7 +185,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             </div>
           </div>
         </div>
-        <div className={isOpenStaff === true ? 'listSelect' : null}>
+        <div className={isOpenStaff === true ? 'listSelect' : null} ref={refStaff}>
           {isOpenStaff
             ? listStaffs !== undefined
               ? listStaffs.map((element, index) => (
@@ -207,7 +211,6 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             onClick={() => {
               setIsOpenProject(!isOpenProject);
             }}
-            ref={refProject}
           >
             <div className='flex flex-auto flex-wrap'>
               {projects.map((element, index) => (
@@ -225,7 +228,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             </div>
           </div>
         </div>
-        <div className={isOpenProject === true ? 'listSelect' : null}>
+        <div className={isOpenProject === true ? 'listSelect' : null} ref={refProject}>
           {isOpenProject
             ? listProjects !== undefined
               ? listProjects.map((element, index) => (

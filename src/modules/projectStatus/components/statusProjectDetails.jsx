@@ -15,7 +15,7 @@ export const StatusProjectDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const data = getData(TABLE_NAME);
-    setDetail(data[id]);
+    setDetail(data.filter(element => element.id === id)[0]);
   }, [isUpdate]);
   const deleteStatusProject = (index, TABLE_NAME) => {
     dispatch(delAStatusProject(index, TABLE_NAME));

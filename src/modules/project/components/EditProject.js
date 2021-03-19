@@ -100,12 +100,13 @@ export const EditProject = ({ index, detail, cancel }) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
+    let listData = data.filter(
+      element => element.name !== detail.name && element.description !== detail.description,
+    );
     if (name === '' || description === '') {
       alert('Please fill in missing information!!');
     } else {
-      name === undefined ? setName(detail.name) : null;
-      description === undefined ? setDescription(detail.name) : null;
-      let department = {
+      let project = {
         name: name,
         description: description,
         typeProjects: typeProjects,
@@ -115,22 +116,30 @@ export const EditProject = ({ index, detail, cancel }) => {
         staffs: staffs,
       };
       if (
-        data.filter(
-          element => element.name === detail.name && element.description === detail.description,
+        listData.filter(
+          element => element.name === project.name && element.description === project.description,
         ).length === 0
       ) {
-        dispatch(updateProject(index, department, TABLE_NAME));
+        dispatch(updateProject(index, project, TABLE_NAME));
         cancel(true);
       } else {
         alert('Type project already exist!!!');
       }
     }
   };
-  handleOutsideClick(refTypeProject, () => setIsOpenTypeProject(false));
-  handleOutsideClick(refStatusProject, () => setIsOpenStatusProject(false));
-  handleOutsideClick(refTechStack, () => setIsOpenTechStack(false));
-  handleOutsideClick(refDepartment, () => setIsOpenDepartment(false));
-  handleOutsideClick(refStaff, () => setIsOpenStaff(false));
+  handleOutsideClick(refTypeProject, () =>
+    isOpenTypeProject === true ? setIsOpenTypeProject(false) : null,
+  );
+  handleOutsideClick(refStatusProject, () =>
+    isOpenStatusProject === true ? setIsOpenStatusProject(false) : null,
+  );
+  handleOutsideClick(refTechStack, () =>
+    isOpenTechStack === true ? setIsOpenTechStack(false) : null,
+  );
+  handleOutsideClick(refDepartment, () =>
+    isOpenDepartment === true ? setIsOpenDepartment(false) : null,
+  );
+  handleOutsideClick(refStaff, () => (isOpenStaff === true ? setIsOpenStaff(false) : null));
   return (
     <div>
       <div className='header'>CREATE</div>
@@ -164,7 +173,6 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenTypeProject(!isOpenTypeProject);
               }}
-              ref={refTypeProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {typeProjects.map((element, index) => (
@@ -182,7 +190,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div className={isOpenTypeProject === true ? 'listSelect' : null}>
+          <div className={isOpenTypeProject === true ? 'listSelect' : null} ref={refTypeProject}>
             {isOpenTypeProject
               ? listTypeProjects !== undefined
                 ? listTypeProjects.map((element, index) => (
@@ -208,7 +216,6 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenStatusProject(!isOpenStatusProject);
               }}
-              ref={refStatusProject}
             >
               <div className='flex flex-auto flex-wrap'>
                 {statusProjects.map((element, index) => (
@@ -226,7 +233,10 @@ export const EditProject = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div className={isOpenStatusProject === true ? 'listSelect' : null}>
+          <div
+            className={isOpenStatusProject === true ? 'listSelect' : null}
+            ref={refStatusProject}
+          >
             {isOpenStatusProject
               ? listStatusProjects !== undefined
                 ? listStatusProjects.map((element, index) => (
@@ -252,7 +262,6 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
-              ref={refTechStack}
             >
               <div className='flex flex-auto flex-wrap'>
                 {techStacks.map((element, index) => (
@@ -270,7 +279,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div className={isOpenTechStack === true ? 'listSelect' : null}>
+          <div className={isOpenTechStack === true ? 'listSelect' : null} ref={refTechStack}>
             {isOpenTechStack
               ? listTechStacks !== undefined
                 ? listTechStacks.map((element, index) => (
@@ -296,7 +305,6 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenDepartment(!isOpenDepartment);
               }}
-              ref={refDepartment}
             >
               <div className='flex flex-auto flex-wrap'>
                 {departments.map((element, index) => (
@@ -314,7 +322,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div className={isOpenDepartment === true ? 'listSelect' : null}>
+          <div className={isOpenDepartment === true ? 'listSelect' : null} ref={refDepartment}>
             {isOpenDepartment
               ? listDepartments !== undefined
                 ? listDepartments.map((element, index) => (
@@ -340,7 +348,6 @@ export const EditProject = ({ index, detail, cancel }) => {
               onClick={() => {
                 setIsOpenStaff(!isOpenStaff);
               }}
-              ref={refStaff}
             >
               <div className='flex flex-auto flex-wrap'>
                 {staffs.map((element, index) => (
@@ -358,7 +365,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div className={isOpenStaff === true ? 'listSelect' : null}>
+          <div className={isOpenStaff === true ? 'listSelect' : null} ref={refStaff}>
             {isOpenStaff
               ? listStaffs !== undefined
                 ? listStaffs.map((element, index) => (

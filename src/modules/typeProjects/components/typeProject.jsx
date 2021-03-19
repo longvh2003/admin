@@ -30,29 +30,29 @@ export const TypeProject = ({ page }) => {
       .filter((element, index) => index >= indexPage * LIMIT && index < (indexPage + 1) * LIMIT)
       .map((element, index) => (
         <tr
-          className='rowTable'
+          className='rowTable grid-cols-11'
           key={index + indexPage * LIMIT}
-          onClick={() => handleDetail(index + indexPage * LIMIT)}
+          onClick={() => handleDetail(element.id)}
         >
-          <td className='py-3 px-6'>
+          <td className='py-3 px-6 col-span-1'>
             <div className='dataTable'>
               <span>{index + 1 + indexPage * LIMIT}</span>
             </div>
           </td>
-          <td className='py-3 px-6'>
+          <td className='py-3 px-6 col-span-3'>
             <div className='dataTable'>
               <span>{element.name}</span>
             </div>
           </td>
-          <td className='py-3 px-6'>
+          <td className='py-3 px-6 col-span-3'>
             <div className='dataTable'>
               <span>{element.description}</span>
             </div>
           </td>
-          <td className='py-3 px-6'>
+          <td className='py-3 px-6 col-span-2'>
             <div className='dataTable'>{element.priority}</div>
           </td>
-          <td className='py-3 px-6 text-center'>
+          <td className='py-3 px-6 text-center col-span-2'>
             <span className='statusTable '>{element.status}</span>
           </td>
         </tr>
@@ -67,12 +67,12 @@ export const TypeProject = ({ page }) => {
       </div>
       <table className='w-full table-auto'>
         <thead>
-          <tr className='rowHeader'>
-            <th className='headerTable'>No.</th>
-            <th className='headerTable'>Name</th>
-            <th className='headerTable'>Description</th>
-            <th className='headerTable'>Priority Number</th>
-            <th className='headerTable'>Status</th>
+          <tr className='rowHeader grid-cols-11'>
+            <th className='headerTable col-span-1'>No.</th>
+            <th className='headerTable col-span-3'>Name</th>
+            <th className='headerTable col-span-3'>Description</th>
+            <th className='headerTable col-span-2'>Priority Number</th>
+            <th className='headerTable col-span-2'>Status</th>
           </tr>
         </thead>
         <tbody>{listElement()}</tbody>

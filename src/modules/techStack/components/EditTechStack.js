@@ -24,20 +24,21 @@ export const EditTechStack = ({ index, detail, cancel }) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
+    let listData = data.filter(
+      element => element.name !== detail.name && element.description !== detail.description,
+    );
     if (detail.name === '' || detail.description === '' || detail.status === 'Choose..') {
       alert('Please fill in missing information!!');
     } else {
-      name.input !== undefined ? (detail.name = name.input) : null;
-      description.input !== undefined ? (detail.description = description.input) : null;
-      status.input !== undefined ? (detail.status = status.input) : null;
       let techStack = {
         name: name,
         description: description,
         status: status,
       };
       if (
-        data.filter(
-          element => element.name === detail.name && element.description === detail.description,
+        listData.filter(
+          element =>
+            element.name === techStack.name && element.description === techStack.description,
         ).length === 0
       ) {
         dispatch(updateTechStack(index, techStack, TABLE_NAME));
