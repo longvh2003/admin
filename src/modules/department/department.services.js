@@ -32,7 +32,7 @@ export const addDepartment = (detail, TABLE_NAME) => dispatch => {
 };
 export const addDataTechStack = (detail, index) => dispatch => {
   if (detail) {
-    let data = JSON.parse(localStorage.getItem(TABLE_NAME));
+    const data = JSON.parse(localStorage.getItem(TABLE_NAME));
     data[index].techStacks.push(detail);
     localStorage.setItem(TABLE_NAME, JSON.stringify(data));
     return dispatch(addDataTechStack);

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import {
   DEPARTMENT,
@@ -22,7 +23,7 @@ export const ProjectDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const data = getData(TABLE_NAME);
-    setDetail(data[id]);
+    setDetail(data.filter(element => element.id === id)[0]);
   }, [isUpdate]);
   const deleteProject = (index, TABLE_NAME) => {
     dispatch(delAProject(index, TABLE_NAME));
@@ -72,11 +73,11 @@ export const ProjectDetail = () => {
             <ul>
               {detail.typeProjects !== undefined
                 ? detail.typeProjects.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, TYPE_PROJECT)}>
-                      <i className='fas fa-stream pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, TYPE_PROJECT)}>
+                    <i className='fas fa-stream pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>
@@ -87,11 +88,11 @@ export const ProjectDetail = () => {
             <ul>
               {detail.statusProjects !== undefined
                 ? detail.statusProjects.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, STATUS_PROJECT)}>
-                      <i className='fas fa-file-alt pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, STATUS_PROJECT)}>
+                    <i className='fas fa-file-alt pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>
@@ -102,11 +103,11 @@ export const ProjectDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
-                      <i className='fas fa-atlas pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
+                    <i className='fas fa-atlas pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>
@@ -117,11 +118,11 @@ export const ProjectDetail = () => {
             <ul>
               {detail.departments !== undefined
                 ? detail.departments.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, DEPARTMENT)}>
-                      <i className='fas fa-code-branch pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, DEPARTMENT)}>
+                    <i className='fas fa-code-branch pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>
@@ -132,11 +133,11 @@ export const ProjectDetail = () => {
             <ul>
               {detail.staffs !== undefined
                 ? detail.staffs.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, STAFF)}>
-                      <i className='fas fa-user pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, STAFF)}>
+                    <i className='fas fa-user pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>

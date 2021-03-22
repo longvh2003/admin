@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { TABLE_NAME } from '../techStack.constants';
 import { useDispatch } from 'react-redux';

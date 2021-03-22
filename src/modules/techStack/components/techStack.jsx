@@ -20,10 +20,10 @@ export const TechStack = ({ page }) => {
   }, []);
   const addTechStack = () => history.push('/create-tech-stack');
   const prevPage = () => {
-    indexPage > 0 ? setIndexPage(indexPage - 1) : null;
+    if (indexPage > 0) setIndexPage(indexPage - 1);
   };
   const nextPage = () => {
-    indexPage < maxPage - 1 ? setIndexPage(indexPage + 1) : null;
+    if (indexPage < maxPage - 1) setIndexPage(indexPage + 1);
   };
   const listElement = techStacks
     .filter((element, index) => index >= indexPage * LIMIT && index < (indexPage + 1) * LIMIT)

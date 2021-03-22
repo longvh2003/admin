@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getData } from '../../../utils/utils';
@@ -8,6 +9,10 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
   const [name, setName] = useState(detail.name);
   const [description, setDescription] = useState(detail.description);
   const [status, setStatus] = useState(detail.status);
+
+  const [isNameFilled, setIsNameFilled] = useState(true);
+  const [isDescriptionFilled, setDescriptionFilled] = useState(true);
+  const [isStatusFilled, setStatusFilled] = useState(true);
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -23,16 +28,21 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
-    let listData = data.filter(
+    const listData = data.filter(
       element => element.name !== detail.name && element.description !== detail.description,
     );
-    if (detail.name === '' || detail.description === '' || detail.status === 'Choose..') {
-      alert('Please fill in missing information!!');
-    } else {
-      let statusProject = {
-        name: name,
-        description: description,
-        status: status,
+    if (name === '') { setIsNameFilled(false); }
+    else setIsNameFilled(true);
+    if (description === '') setDescriptionFilled(false);
+    else setDescriptionFilled(true);
+    if (status === 'Choose..') setStatusFilled(false);
+    else setStatusFilled(true);
+    if (name !== '' && description !== '' && status !== 'Choose..') {
+      const statusProject = {
+        name,
+        description,
+        status,
+        id: detail.id,
       };
       if (
         listData.filter(
@@ -43,14 +53,13 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
       ) {
         dispatch(updateStatusProject(index, statusProject, TABLE_NAME));
         cancel(true);
-      } else {
-        alert('Status project already exist!!!');
       }
+      else alert('Status project already exist!!!');
     }
   };
   return (
     <div>
-      <div className='header'>EDIT</div>
+      <div className='header'>CREATE</div>
       <div className='containerDetail'>
         <div className='groupData'>
           <label className='leading-loose'>Name :</label>
@@ -63,6 +72,7 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
             autoFocus
           />
         </div>
+        {!isNameFilled ? <div className='text-red-600'>Please fill in name</div> : null}
         <div className='groupData'>
           <label className='leading-loose'>Description :</label>
           <textarea
@@ -73,13 +83,18 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
             onChange={handleChangeDescription}
           />
         </div>
+        {!isDescriptionFilled
+          ? <div className='text-red-600'>Please fill in description</div> : null}
         <div className='groupData'>
           <label>Status:</label>
           <select className='select' name='status' value={status} onChange={handleChangeStatus}>
+            <option value='Choose..'>Choose..</option>
             <option value='active'>Active</option>
             <option value='inactive'>Inactive</option>
           </select>
         </div>
+        {!isStatusFilled
+          ? <div className='text-red-600'>Please choose status</div> : null}
         <div>
           <div className='groupBtn'>
             <button className='btnCancel' onClick={() => cancel(true)}>

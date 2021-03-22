@@ -19,10 +19,10 @@ export const StatusProject = ({ page }) => {
     dispatch(getAllStatusProject(data));
   }, []);
   const prevPage = () => {
-    indexPage > 0 ? setIndexPage(indexPage - 1) : null;
+    if (indexPage > 0) setIndexPage(indexPage - 1);
   };
   const nextPage = () => {
-    indexPage < maxPage - 1 ? setIndexPage(indexPage + 1) : null;
+    if (indexPage < maxPage - 1) setIndexPage(indexPage + 1);
   };
   const addStatusProject = () => history.push('/create-status-project');
   const listElement = statusProjects

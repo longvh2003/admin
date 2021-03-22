@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { handleOutsideClick } from '../../../services/handleOutsideClick';
@@ -35,6 +36,15 @@ export const EditProject = ({ index, detail, cancel }) => {
   const refTechStack = useRef();
   const refDepartment = useRef();
   const refStaff = useRef();
+
+  const [isNameFilled, setNameFilled] = useState(true);
+  const [isDescriptionFilled, setDescriptionFilled] = useState(true);
+  const [isTypeProjectFilled, setTypeProjectFilled] = useState(true);
+  const [isStatusProjectFilled, setStatusProjectFilled] = useState(true);
+  const [isTechStackFilled, setTechStackFilled] = useState(true);
+  const [isDepartmentFilled, setDepartmentFilled] = useState(true);
+  const [isStaffFilled, setStaffFilled] = useState(true);
+
   const handleChangeName = e => {
     setName(e.target.value);
   };
@@ -44,76 +54,86 @@ export const EditProject = ({ index, detail, cancel }) => {
   };
   const handleSelectTypeProject = element => {
     if (typeProjects.indexOf(element) === -1) {
-      let list = [...typeProjects, element];
+      const list = [...typeProjects, element];
       setTypeProject(list);
-    } else {
-      handleDeleteTypeProject(element);
     }
+    else handleDeleteTypeProject(element);
   };
   const handleDeleteTypeProject = element => {
-    setTypeProject(typeProjects.filter(item => item != element));
+    setTypeProject(typeProjects.filter(item => item !== element));
   };
   const handleSelectStatusProject = element => {
     if (statusProjects.indexOf(element) === -1) {
-      let list = [...statusProjects, element];
+      const list = [...statusProjects, element];
       setStatusProject(list);
-    } else {
-      handleDeleteStatusProject(element);
     }
+    else handleDeleteStatusProject(element);
   };
   const handleDeleteStatusProject = element => {
-    setStatusProject(statusProjects.filter(item => item != element));
+    setStatusProject(statusProjects.filter(item => item !== element));
   };
   const handleSelectTechStack = element => {
     if (techStacks.indexOf(element) === -1) {
-      let list = [...techStacks, element];
+      const list = [...techStacks, element];
       setTechStack(list);
-    } else {
-      handleDeleteTechStack(element);
     }
+    else handleDeleteTechStack(element);
   };
   const handleDeleteTechStack = element => {
-    setTechStack(techStacks.filter(item => item != element));
+    setTechStack(techStacks.filter(item => item !== element));
   };
   const handleSelectDepartment = element => {
     if (departments.indexOf(element) === -1) {
-      let list = [...departments, element];
+      const list = [...departments, element];
       setDepartment(list);
-    } else {
-      handleDeleteDepartment(element);
     }
+    else handleDeleteDepartment(element);
   };
   const handleDeleteDepartment = element => {
-    setDepartment(departments.filter(item => item != element));
+    setDepartment(departments.filter(item => item !== element));
   };
   const handleSelectStaff = element => {
     if (staffs.indexOf(element) === -1) {
-      let list = [...staffs, element];
+      const list = [...staffs, element];
       setStaff(list);
-    } else {
-      handleDeleteStaff(element);
     }
+    else handleDeleteStaff(element);
   };
   const handleDeleteStaff = element => {
-    setStaff(staffs.filter(item => item != element));
+    setStaff(staffs.filter(item => item !== element));
   };
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const data = getData(TABLE_NAME);
-    let listData = data.filter(
+    const listData = data.filter(
       element => element.name !== detail.name && element.description !== detail.description,
     );
-    if (name === '' || description === '') {
-      alert('Please fill in missing information!!');
-    } else {
-      let project = {
-        name: name,
-        description: description,
-        typeProjects: typeProjects,
-        statusProjects: statusProjects,
-        techStacks: techStacks,
-        departments: departments,
-        staffs: staffs,
+    if (name === '') setNameFilled(false);
+    else setNameFilled(true);
+    if (description === '') setDescriptionFilled(false);
+    else setDescriptionFilled(true);
+    if (typeProjects.length === 0) setTypeProjectFilled(false);
+    else setTypeProjectFilled(true);
+    if (statusProjects.length === 0) setStatusProjectFilled(false);
+    else setStatusProjectFilled(true);
+    if (techStacks.length === 0) setTechStackFilled(false);
+    else setTechStackFilled(true);
+    if (departments.length === 0) setDepartmentFilled(false);
+    else setDepartmentFilled(true);
+    if (staffs.length === 0) setStaffFilled(false);
+    else setStaffFilled(true);
+    if (name !== '' && description !== '' &&
+    typeProjects.length !== 0 && statusProjects !== 0 &&
+    techStacks.length !== 0 && departments.length !== 0 && staffs.length !== 0) {
+      const project = {
+        name,
+        description,
+        typeProjects,
+        statusProjects,
+        techStacks,
+        departments,
+        staffs,
+        id: detail.id,
       };
       if (
         listData.filter(
@@ -122,9 +142,8 @@ export const EditProject = ({ index, detail, cancel }) => {
       ) {
         dispatch(updateProject(index, project, TABLE_NAME));
         cancel(true);
-      } else {
-        alert('Type project already exist!!!');
       }
+      else alert('Type project already exist!!!');
     }
   };
   handleOutsideClick(refTypeProject, () =>
@@ -155,6 +174,8 @@ export const EditProject = ({ index, detail, cancel }) => {
             autoFocus
           />
         </div>
+        {!isNameFilled
+          ? <div className='text-red-600'>Please fill in name</div> : null}
         <div className='groupData'>
           <label className='leading-loose'>Description :</label>
           <textarea
@@ -165,6 +186,8 @@ export const EditProject = ({ index, detail, cancel }) => {
             onChange={handleChangeDescription}
           />
         </div>
+        {!isDescriptionFilled
+          ? <div className='text-red-600'>Please fill in description</div> : null}
         <div>
           <div className='groupData'>
             <label>Type Project :</label>
@@ -191,24 +214,24 @@ export const EditProject = ({ index, detail, cancel }) => {
             </div>
           </div>
           <div className={isOpenTypeProject === true ? 'listSelect' : null} ref={refTypeProject}>
-            {isOpenTypeProject
-              ? listTypeProjects !== undefined
-                ? listTypeProjects.map((element, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSelectTypeProject(element.name)}
-                      className={
-                        typeProjects.indexOf(element.name) === -1
-                          ? 'selected py-1'
-                          : 'selected line-through bg-gray-400 py-1'
-                      }
-                    >
-                      {element.name}
-                    </div>
-                  ))
-                : null
+            {isOpenTypeProject && listTypeProjects !== undefined
+              ? listTypeProjects.map((element, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleSelectTypeProject(element.name)}
+                  className={
+                    typeProjects.indexOf(element.name) === -1
+                      ? 'selected py-1'
+                      : 'selected line-through bg-gray-400 py-1'
+                  }
+                >
+                  {element.name}
+                </div>
+              ))
               : null}
           </div>
+          {!isTypeProjectFilled
+            ? <div className='text-red-600'>Please choose type project</div> : null}
           <div className='groupData'>
             <label>Status Project :</label>
             <div
@@ -233,28 +256,26 @@ export const EditProject = ({ index, detail, cancel }) => {
               </div>
             </div>
           </div>
-          <div
-            className={isOpenStatusProject === true ? 'listSelect' : null}
-            ref={refStatusProject}
-          >
-            {isOpenStatusProject
-              ? listStatusProjects !== undefined
-                ? listStatusProjects.map((element, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSelectStatusProject(element.name)}
-                      className={
-                        statusProjects.indexOf(element.name) === -1
-                          ? 'selected py-1'
-                          : 'selected line-through bg-gray-400 py-1'
-                      }
-                    >
-                      {element.name}
-                    </div>
-                  ))
-                : null
+          <div className={isOpenStatusProject === true ? 'listSelect' : null}
+            ref={refStatusProject}>
+            {isOpenStatusProject && listStatusProjects !== undefined
+              ? listStatusProjects.map((element, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleSelectStatusProject(element.name)}
+                  className={
+                    statusProjects.indexOf(element.name) === -1
+                      ? 'selected py-1'
+                      : 'selected line-through bg-gray-400 py-1'
+                  }
+                >
+                  {element.name}
+                </div>
+              ))
               : null}
           </div>
+          {!isStatusProjectFilled
+            ? <div className='text-red-600'>Please choose status project</div> : null}
           <div className='groupData'>
             <label>Tech Stack :</label>
             <div
@@ -280,24 +301,24 @@ export const EditProject = ({ index, detail, cancel }) => {
             </div>
           </div>
           <div className={isOpenTechStack === true ? 'listSelect' : null} ref={refTechStack}>
-            {isOpenTechStack
-              ? listTechStacks !== undefined
-                ? listTechStacks.map((element, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSelectTechStack(element.name)}
-                      className={
-                        techStacks.indexOf(element.name) === -1
-                          ? 'selected py-1'
-                          : 'selected line-through bg-gray-400 py-1'
-                      }
-                    >
-                      {element.name}
-                    </div>
-                  ))
-                : null
+            {isOpenTechStack && listTechStacks !== undefined
+              ? listTechStacks.map((element, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleSelectTechStack(element.name)}
+                  className={
+                    techStacks.indexOf(element.name) === -1
+                      ? 'selected py-1'
+                      : 'selected line-through bg-gray-400 py-1'
+                  }
+                >
+                  {element.name}
+                </div>
+              ))
               : null}
           </div>
+          {!isTechStackFilled
+            ? <div className='text-red-600'>Please choose tech stack</div> : null}
           <div className='groupData'>
             <label>Department :</label>
             <div
@@ -323,24 +344,24 @@ export const EditProject = ({ index, detail, cancel }) => {
             </div>
           </div>
           <div className={isOpenDepartment === true ? 'listSelect' : null} ref={refDepartment}>
-            {isOpenDepartment
-              ? listDepartments !== undefined
-                ? listDepartments.map((element, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSelectDepartment(element.name)}
-                      className={
-                        departments.indexOf(element.name) === -1
-                          ? 'selected py-1'
-                          : 'selected line-through bg-gray-400 py-1'
-                      }
-                    >
-                      {element.name}
-                    </div>
-                  ))
-                : null
+            {isOpenDepartment && listDepartments !== undefined
+              ? listDepartments.map((element, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleSelectDepartment(element.name)}
+                  className={
+                    departments.indexOf(element.name) === -1
+                      ? 'selected py-1'
+                      : 'selected line-through bg-gray-400 py-1'
+                  }
+                >
+                  {element.name}
+                </div>
+              ))
               : null}
           </div>
+          {!isDepartmentFilled
+            ? <div className='text-red-600'>Please choose department</div> : null}
           <div className='groupData'>
             <label>Staff :</label>
             <div
@@ -366,24 +387,24 @@ export const EditProject = ({ index, detail, cancel }) => {
             </div>
           </div>
           <div className={isOpenStaff === true ? 'listSelect' : null} ref={refStaff}>
-            {isOpenStaff
-              ? listStaffs !== undefined
-                ? listStaffs.map((element, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSelectStaff(element.name)}
-                      className={
-                        staffs.indexOf(element.name) === -1
-                          ? 'selected py-1'
-                          : 'selected line-through bg-gray-400 py-1'
-                      }
-                    >
-                      {element.name}
-                    </div>
-                  ))
-                : null
+            {isOpenStaff && listStaffs !== undefined
+              ? listStaffs.map((element, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleSelectStaff(element.name)}
+                  className={
+                    staffs.indexOf(element.name) === -1
+                      ? 'selected py-1'
+                      : 'selected line-through bg-gray-400 py-1'
+                  }
+                >
+                  {element.name}
+                </div>
+              ))
               : null}
           </div>
+          {!isStaffFilled
+            ? <div className='text-red-600'>Please choose staff</div> : null}
           <div>
             <div className='groupBtn'>
               <button className='btnCancel' onClick={() => cancel(true)}>

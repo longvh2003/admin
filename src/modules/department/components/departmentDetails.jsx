@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { PROJECT, STAFF, TABLE_NAME, TECH_STACK } from '../department.constants';
 import { useDispatch } from 'react-redux';
@@ -15,7 +16,7 @@ export const DepartmentDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const data = getData(TABLE_NAME);
-    setDetail(data[id]);
+    setDetail(data.filter(element => element.id === id)[0]);
   }, [isUpdate]);
   const deleteDepartment = (index, TABLE_NAME) => {
     dispatch(delADepartment(index, TABLE_NAME));
@@ -58,11 +59,11 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
-                      <i className='fas fa-atlas pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
+                    <i className='fas fa-atlas pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>
@@ -73,11 +74,11 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.staffs !== undefined
                 ? detail.staffs.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, STAFF)}>
-                      <i className='fas fa-user pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, STAFF)}>
+                    <i className='fas fa-user pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>
@@ -88,11 +89,11 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.projects !== undefined
                 ? detail.projects.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, PROJECT)}>
-                      <i className='fas fa-tasks pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, PROJECT)}>
+                    <i className='fas fa-tasks pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>

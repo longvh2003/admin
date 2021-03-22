@@ -16,7 +16,7 @@ export const LeftMenu = () => {
             onClick={() => setUser(!user)}
           />
         </div>
-        <div className='col-span-3 grid grid-rows-2 py-1 hidden lg:block'>
+        <div className='col-span-3 grid grid-rows-2 py-1 lg:block'>
           <p className='row-span-1 px-2'>Amer Al-Barkawi</p>
           <div className='row-span-1'>
             <i className='fas fa-circle statusLeftMenu'></i>Online

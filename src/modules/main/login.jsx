@@ -1,3 +1,4 @@
+import React from 'react';
 import Background from '../../assets/images/loginImg.jpg';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
@@ -56,7 +57,8 @@ export const Login = () => {
                   <div className='flex flex-col mt-8'>
                     <button
                       onClick={handleSubmit}
-                      className='bg-gray-500 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded'
+                      className='bg-gray-500 hover:bg-gray-700
+                      text-white text-sm font-semibold py-2 px-4 rounded'
                     >
                       Login
                     </button>

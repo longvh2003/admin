@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TABLE_NAME } from '../statusProject.constants';
@@ -9,6 +10,10 @@ export const StatusProjectCreate = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('Choose..');
+
+  const [isNameFilled, setIsNameFilled] = useState(true);
+  const [isDescriptionFilled, setDescriptionFilled] = useState(true);
+  const [isStatusFilled, setStatusFilled] = useState(true);
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -26,13 +31,17 @@ export const StatusProjectCreate = () => {
   const handleCancel = () => history.push('status-project');
   const handleAdd = () => {
     const data = getData(TABLE_NAME);
-    if (name === '' || description === '' || status === 'Choose..') {
-      alert('Please fill in missing information!!');
-    } else {
-      let detail = {
-        name: name,
-        description: description,
-        status: status,
+    if (name === '') { setIsNameFilled(false); }
+    else setIsNameFilled(true);
+    if (description === '') setDescriptionFilled(false);
+    else setDescriptionFilled(true);
+    if (status === 'Choose..') setStatusFilled(false);
+    else setStatusFilled(true);
+    if (name !== '' && description !== '' && status !== 'Choose..') {
+      const detail = {
+        name,
+        description,
+        status,
         id: Math.random().toString(36).substring(4),
       };
       if (
@@ -42,9 +51,8 @@ export const StatusProjectCreate = () => {
       ) {
         dispatch(addStatusProject(detail, TABLE_NAME));
         history.push('status-project');
-      } else {
-        alert('Status project already exist!!!');
       }
+      else alert('Status project already exist!!!');
     }
   };
   return (
@@ -62,6 +70,7 @@ export const StatusProjectCreate = () => {
             autoFocus
           />
         </div>
+        {!isNameFilled ? <div className='text-red-600'>Please fill in name</div> : null}
         <div className='groupData'>
           <label className='leading-loose'>Description :</label>
           <textarea
@@ -72,14 +81,18 @@ export const StatusProjectCreate = () => {
             onChange={handleChangeDescription}
           />
         </div>
+        {!isDescriptionFilled
+          ? <div className='text-red-600'>Please fill in description</div> : null}
         <div className='groupData'>
           <label>Status:</label>
           <select className='select' name='status' value={status} onChange={handleChangeStatus}>
-            <option value='0'>Choose..</option>
+            <option value='Choose..'>Choose..</option>
             <option value='active'>Active</option>
             <option value='inactive'>Inactive</option>
           </select>
         </div>
+        {!isStatusFilled
+          ? <div className='text-red-600'>Please choose status</div> : null}
         <div>
           <div className='groupBtn'>
             <button className='btnCancel' onClick={handleCancel}>

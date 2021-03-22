@@ -20,10 +20,10 @@ export const TypeProject = ({ page }) => {
   }, []);
   const addTypeProject = () => history.push('/create-type-project');
   const prevPage = () => {
-    indexPage > 0 ? setIndexPage(indexPage - 1) : null;
+    if (indexPage > 0) setIndexPage(indexPage - 1);
   };
   const nextPage = () => {
-    indexPage < maxPage - 1 ? setIndexPage(indexPage + 1) : null;
+    if (indexPage < maxPage - 1) setIndexPage(indexPage + 1);
   };
   const listElement = () =>
     typeProjects

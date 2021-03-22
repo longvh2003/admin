@@ -19,10 +19,10 @@ export const Department = ({ page }) => {
     dispatch(getAllDepartment(data));
   }, []);
   const prevPage = () => {
-    indexPage > 0 ? setIndexPage(indexPage - 1) : null;
+    if (indexPage > 0) setIndexPage(indexPage - 1);
   };
   const nextPage = () => {
-    indexPage < maxPage - 1 ? setIndexPage(indexPage + 1) : null;
+    if (indexPage < maxPage - 1) setIndexPage(indexPage + 1);
   };
   const addDepartment = () => history.push('/create-department');
   const listElement = departments
@@ -31,7 +31,7 @@ export const Department = ({ page }) => {
       <tr
         className='rowTable'
         key={index + indexPage * LIMIT}
-        onClick={() => handleDetail(index + indexPage * LIMIT)}
+        onClick={() => handleDetail(element.id)}
       >
         <td className='py-3 px-6'>
           <div className='dataTable'>

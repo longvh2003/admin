@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TABLE_NAME } from '../typeProject.constants';
@@ -10,6 +11,11 @@ export const TypeProjectCreate = () => {
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('Choose..');
   const [status, setStatus] = useState('Choose..');
+
+  const [isNameFilled, setIsNameFilled] = useState(true);
+  const [isDescriptionFilled, setDescriptionFilled] = useState(true);
+  const [isPriorityFilled, setPriorityFilled] = useState(true);
+  const [isStatusFilled, setStatusFilled] = useState(true);
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -31,14 +37,20 @@ export const TypeProjectCreate = () => {
   const handleCancel = () => history.push('type-project');
   const handleAdd = () => {
     const data = getData(TABLE_NAME);
-    if (name === '' || description === '' || priority === 'Choose..' || status === 'Choose..') {
-      alert('Please fill in missing information!!');
-    } else {
-      let detail = {
-        name: name,
-        description: description,
-        priority: priority,
-        status: status,
+    if (name === '') { setIsNameFilled(false); }
+    else setIsNameFilled(true);
+    if (description === '') setDescriptionFilled(false);
+    else setDescriptionFilled(true);
+    if (priority === 'Choose..') setPriorityFilled(false);
+    else setPriorityFilled(true);
+    if (status === 'Choose..') setStatusFilled(false);
+    else setStatusFilled(true);
+    if (name !== '' && description !== '' && priority !== 'Choose..' && status !== 'Choose..') {
+      const detail = {
+        name,
+        description,
+        priority,
+        status,
         id: Math.random().toString(36).substring(4),
       };
       if (
@@ -48,9 +60,8 @@ export const TypeProjectCreate = () => {
       ) {
         dispatch(addTypeProject(detail, TABLE_NAME));
         history.push('type-project');
-      } else {
-        alert('Type project already exist!!!');
       }
+      else alert('Type project already exist!!!');
     }
   };
   return (
@@ -58,7 +69,7 @@ export const TypeProjectCreate = () => {
       <div className='header'>CREATE</div>
       <div className='containerDetail'>
         <div className='groupData'>
-          <label className='leading-loose'>Name :</label>
+          <label className='leading-loose'>Name:</label>
           <input
             type='text'
             className='inputDetail'
@@ -68,8 +79,9 @@ export const TypeProjectCreate = () => {
             autoFocus
           />
         </div>
+        {!isNameFilled ? <div className='text-red-600'>Please fill in name</div> : null}
         <div className='groupData'>
-          <label className='leading-loose'>Description :</label>
+          <label className='leading-loose'>Description:</label>
           <textarea
             type='text'
             className='inputDetail'
@@ -78,6 +90,8 @@ export const TypeProjectCreate = () => {
             onChange={handleChangeDescription}
           />
         </div>
+        {!isDescriptionFilled
+          ? <div className='text-red-600'>Please fill in description</div> : null}
         <div className='groupData'>
           <label>Priority:</label>
           <select
@@ -92,12 +106,15 @@ export const TypeProjectCreate = () => {
             <option value='3'>3</option>
             <option value='4'>4</option>
           </select>
+          {!isPriorityFilled
+            ? <div className='text-red-600'>Please choose priority number</div> : null}
           <label>Status:</label>
           <select className='select' name='status' value={status} onChange={handleChangeStatus}>
             <option value='0'>Choose..</option>
             <option value='active'>Active</option>
             <option value='inactive'>Inactive</option>
           </select>
+          {!isStatusFilled ? <div className='text-red-600'>Please choose status</div> : null}
         </div>
         <div>
           <div className='groupBtn'>

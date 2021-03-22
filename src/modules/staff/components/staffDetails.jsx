@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { TABLE_NAME, TECH_STACK, PROJECT } from '../staff.constants';
 import { useDispatch } from 'react-redux';
@@ -15,7 +16,7 @@ export const StaffDetail = () => {
   const { id } = useParams();
   useEffect(() => {
     const data = getData(TABLE_NAME);
-    setDetail(data[id]);
+    setDetail(data.filter(element => element.id === id)[0]);
   }, [isUpdate]);
   const deleteStaff = (index, TABLE_NAME) => {
     dispatch(delAStaff(index, TABLE_NAME));
@@ -51,7 +52,7 @@ export const StaffDetail = () => {
         </div>
         <div className='groupData'>
           <label className='leading-loose'>Identification Number :</label>
-          <input type='text' className='inputDetail' value={detail.id} readOnly />
+          <input type='text' className='inputDetail' value={detail.identificationNumber} readOnly />
         </div>
         <div className='groupData'>
           <label className='leading-loose'>Phone Number :</label>
@@ -67,11 +68,11 @@ export const StaffDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
-                      <i className='fas fa-atlas pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
+                    <i className='fas fa-atlas pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>
@@ -82,11 +83,11 @@ export const StaffDetail = () => {
             <ul>
               {detail.projects !== undefined
                 ? detail.projects.map((element, index) => (
-                    <li key={index} onClick={() => handleDetail(element, PROJECT)}>
-                      <i className='fas fa-tasks pr-2'></i>
-                      {element}
-                    </li>
-                  ))
+                  <li key={index} onClick={() => handleDetail(element, PROJECT)}>
+                    <i className='fas fa-tasks pr-2'></i>
+                    {element}
+                  </li>
+                ))
                 : null}
             </ul>
           </div>

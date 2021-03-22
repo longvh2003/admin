@@ -20,19 +20,15 @@ export const Staff = ({ page }) => {
   }, []);
   const addStaff = () => history.push('/create-staff');
   const prevPage = () => {
-    indexPage > 0 ? setIndexPage(indexPage - 1) : null;
+    if (indexPage > 0) setIndexPage(indexPage - 1);
   };
   const nextPage = () => {
-    indexPage < maxPage - 1 ? setIndexPage(indexPage + 1) : null;
+    if (indexPage < maxPage - 1) setIndexPage(indexPage + 1);
   };
   const listElement = staffs
     .filter((element, index) => index >= indexPage * LIMIT && index < (indexPage + 1) * LIMIT)
     .map((element, index) => (
-      <tr
-        className='rowTable'
-        key={index + indexPage * 3}
-        onClick={() => handleDetail(index + indexPage * LIMIT)}
-      >
+      <tr className='rowTable' key={index + indexPage * 3} onClick={() => handleDetail(element.id)}>
         <td className='py-3 px-6'>
           <div className='dataTable'>
             <span>{index + 1 + indexPage * LIMIT}</span>
