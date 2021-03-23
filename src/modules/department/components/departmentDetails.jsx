@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { PROJECT, STAFF, TABLE_NAME, TECH_STACK } from '../department.constants';
 import { useDispatch } from 'react-redux';
@@ -7,8 +8,10 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getData, getIndex } from '../../../utils/utils';
 import { EditDepartment } from './EditDepartment';
+import { handleOutsideClick } from '../../../services/handleOutsideClick';
 
 export const DepartmentDetail = () => {
+  const [toggleDelete, setToggleDelete] = useState(false);
   const [isUpdate, setIsUpdate] = useState(true);
   const [detail, setDetail] = useState({});
   const dispatch = useDispatch();
@@ -20,7 +23,7 @@ export const DepartmentDetail = () => {
   }, [isUpdate]);
   const deleteDepartment = (index, TABLE_NAME) => {
     dispatch(delADepartment(index, TABLE_NAME));
-    history.push('/department');
+    history.push('/department/page/1');
   };
   const handleDetail = (element, TABLE) => {
     const index = getIndex(element, TABLE);
@@ -36,11 +39,29 @@ export const DepartmentDetail = () => {
         break;
     }
   };
+  const ref = useRef();
+  handleOutsideClick(ref, () => { if (toggleDelete) setToggleDelete(false); });
   return isUpdate ? (
-    <div>
+    <div className='relative'>
+      {toggleDelete ? <div
+        className='modalConfirm'
+        ref={ref}
+      >
+        <div className='text-center pt-4 text-4xl'>Are you sure?</div>
+        <div className='text-center px-16 py-4'>
+          If you proceed, you will lose your data. Are you sure you want to delete it? </div>
+        <div className='groupBtn'>
+          <button className='btnNo' onClick={() => setToggleDelete(false)}>
+            NO
+          </button>
+          <button className='btnYes' onClick={() => deleteDepartment(id, TABLE_NAME)}>
+            YES
+          </button>
+        </div>
+      </div> : null}
       <div className='header'>DETAIL</div>
       <div className='my-3 mx-10'>
-        <button onClick={() => history.push('/department')} className='btn'>
+        <button onClick={() => history.push('/department/page/1')} className='btn'>
           Back
         </button>
       </div>
@@ -100,7 +121,7 @@ export const DepartmentDetail = () => {
         </div>
         <div>
           <div className='groupBtn'>
-            <button className='btnCancel' onClick={() => deleteDepartment(id, TABLE_NAME)}>
+            <button className='btnCancel' onClick={() => setToggleDelete(true)}>
               <i className='fas fa-times px-3'></i>DELETE
             </button>
             <button className='btnConfirm' onClick={() => setIsUpdate(false)}>

@@ -34,7 +34,7 @@ export const CustomerCreate = () => {
   };
   const history = useHistory();
   const dispatch = useDispatch();
-  const handleCancel = () => history.push('customer');
+  const handleCancel = () => history.push('customer/page/1');
   const handleAdd = () => {
     const data = getData(TABLE_NAME);
     if (name === '') { setIsNameFilled(false); }
@@ -59,7 +59,7 @@ export const CustomerCreate = () => {
         ).length === 0
       ) {
         dispatch(addCustomer(detail, TABLE_NAME));
-        history.push('customer');
+        history.push('customer/page/1');
       }
       else alert('Type project already exist!!!');
     }

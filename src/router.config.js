@@ -22,7 +22,7 @@ import { ProjectDetails } from './pages/project/staffDetail';
 
 export const routes = [
   {
-    path: '/type-project',
+    path: '/type-project/page/:page',
     component: TypeProjects,
     exact: true,
   },
@@ -37,7 +37,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/status-project',
+    path: '/status-project/page/:page',
     component: StatusProjects,
     exact: true,
   },
@@ -52,7 +52,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/tech-stack',
+    path: '/tech-stack/page/:page',
     component: TechStacks,
     exact: true,
   },
@@ -67,7 +67,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/customer',
+    path: '/customer/page/:page',
     component: Customers,
     exact: true,
   },
@@ -82,7 +82,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/department',
+    path: '/department/page/:page',
     component: Departments,
     exact: true,
   },
@@ -97,7 +97,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/staff',
+    path: '/staff/page/:page',
     component: Staffs,
     exact: true,
   },
@@ -112,7 +112,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/project',
+    path: '/project/page/:page',
     component: Projects,
     exact: true,
   },

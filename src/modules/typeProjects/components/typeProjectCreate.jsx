@@ -34,7 +34,7 @@ export const TypeProjectCreate = () => {
   };
   const history = useHistory();
   const dispatch = useDispatch();
-  const handleCancel = () => history.push('type-project');
+  const handleCancel = () => history.push('type-project/page/1');
   const handleAdd = () => {
     const data = getData(TABLE_NAME);
     if (name === '') { setIsNameFilled(false); }
@@ -59,7 +59,7 @@ export const TypeProjectCreate = () => {
         ).length === 0
       ) {
         dispatch(addTypeProject(detail, TABLE_NAME));
-        history.push('type-project');
+        history.push('type-project/page/1');
       }
       else alert('Type project already exist!!!');
     }

@@ -28,7 +28,7 @@ export const StatusProjectCreate = () => {
   };
   const history = useHistory();
   const dispatch = useDispatch();
-  const handleCancel = () => history.push('status-project');
+  const handleCancel = () => history.push('status-project/page/1');
   const handleAdd = () => {
     const data = getData(TABLE_NAME);
     if (name === '') { setIsNameFilled(false); }
@@ -50,7 +50,7 @@ export const StatusProjectCreate = () => {
         ).length === 0
       ) {
         dispatch(addStatusProject(detail, TABLE_NAME));
-        history.push('status-project');
+        history.push('status-project/page/1');
       }
       else alert('Status project already exist!!!');
     }

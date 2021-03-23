@@ -15,7 +15,7 @@ export const Login = () => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    if (email === 'admin@gmail.com' && password === 'admin123') history.push('type-project');
+    if (email === 'admin@gmail.com' && password === 'admin123') history.push('type-project/page/1');
     else alert('Sorry, your password was incorrect. Please double-check your password.');
   };
   return (

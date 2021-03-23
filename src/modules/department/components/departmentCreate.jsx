@@ -69,7 +69,7 @@ export const DepartmentCreate = () => {
   };
   const dispatch = useDispatch();
   const history = useHistory();
-  const handleCancel = () => history.push('department');
+  const handleCancel = () => history.push('department/page/1');
   const handleAdd = () => {
     const data = getData(TABLE_NAME);
     if (name === '') setNameFilled(false);
@@ -98,7 +98,7 @@ export const DepartmentCreate = () => {
         ).length === 0
       ) {
         dispatch(addDepartment(detail, TABLE_NAME));
-        history.push('department');
+        history.push('department/page/1');
       }
       else alert('Type department already exist!!!');
     }

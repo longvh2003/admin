@@ -27,7 +27,7 @@ export const LeftMenu = () => {
       <div className='headerLeftMenu invisible md:visible'>CATEGORY</div>
       <div>
         <button className='btnLeftMenu'>
-          <NavLink to='/type-project'>
+          <NavLink to='/type-project/page/1'>
             <div className='grid grid-cols-7'>
               <div className='col-span-1'>
                 <i className='fas fa-stream pr-2'></i>
@@ -39,7 +39,7 @@ export const LeftMenu = () => {
       </div>
       <div>
         <button className='btnLeftMenu'>
-          <NavLink to='/status-project'>
+          <NavLink to='/status-project/page/1'>
             <div className='grid grid-cols-7'>
               <div className='col-span-1'>
                 <i className='fas fa-file-alt pr-2'></i>
@@ -51,7 +51,7 @@ export const LeftMenu = () => {
       </div>
       <div>
         <button className='btnLeftMenu'>
-          <NavLink to='/tech-stack'>
+          <NavLink to='/tech-stack/page/1'>
             <div className='grid grid-cols-7'>
               <div className='col-span-1'>
                 <i className='fas fa-atlas pr-2'></i>
@@ -63,7 +63,7 @@ export const LeftMenu = () => {
       </div>
       <div>
         <button className='btnLeftMenu'>
-          <NavLink to='/customer'>
+          <NavLink to='/customer/page/1'>
             <div className='grid grid-cols-7'>
               <div className='col-span-1'>
                 <i className='fas fa-male pr-2'></i>
@@ -76,7 +76,7 @@ export const LeftMenu = () => {
       <div className='headerLeftMenu invisible md:visible'>MANAGER</div>
       <div>
         <button className='btnLeftMenu'>
-          <NavLink to='/department'>
+          <NavLink to='/department/page/1'>
             <div className='grid grid-cols-7'>
               <div className='col-span-1'>
                 <i className='fas fa-code-branch pr-2'></i>
@@ -88,7 +88,7 @@ export const LeftMenu = () => {
       </div>
       <div>
         <button className='btnLeftMenu'>
-          <NavLink to='/staff'>
+          <NavLink to='/staff/page/1'>
             <div className='grid grid-cols-7'>
               <div className='col-span-1'>
                 <i className='fas fa-user pr-2'></i>
@@ -100,7 +100,7 @@ export const LeftMenu = () => {
       </div>
       <div>
         <button className='btnLeftMenu'>
-          <NavLink to='/project'>
+          <NavLink to='/project/page/1'>
             <div className='grid grid-cols-7'>
               <div className='col-span-1'>
                 <i className='fas fa-tasks pr-2'></i>

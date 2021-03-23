@@ -28,7 +28,7 @@ export const TechStackCreate = () => {
   };
   const history = useHistory();
   const dispatch = useDispatch();
-  const handleCancel = () => history.push('tech-stack');
+  const handleCancel = () => history.push('tech-stack/page/1');
   const handleAdd = () => {
     const data = getData(TABLE_NAME);
     if (name === '') { setIsNameFilled(false); }
@@ -50,7 +50,7 @@ export const TechStackCreate = () => {
         ).length === 0
       ) {
         dispatch(addTechStack(detail, TABLE_NAME));
-        history.push('tech-stack');
+        history.push('tech-stack/page/1');
       }
       else alert('Type project already exist!!!');
     }

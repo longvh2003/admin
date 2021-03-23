@@ -1,41 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../../../utils/utils';
 import { getAllProject } from '../project.services';
 import { TABLE_NAME, LIMIT } from '../project.constants';
 import { useHistory } from 'react-router-dom';
 
-export const Project = ({ page }) => {
+export const Project = () => {
+  const { page } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const handleDetail = index => {
     history.push(`/project/${index}`);
   };
   const projects = useSelector(state => state.project.data);
-  const [indexPage, setIndexPage] = useState(page);
   const maxPage = useSelector(state => state.project.page);
   useEffect(() => {
     const data = getData(TABLE_NAME);
     dispatch(getAllProject(data));
   }, []);
   const prevPage = () => {
-    if (indexPage > 0) setIndexPage(indexPage - 1);
+    if (page > 1) history.push(`/project/page/${parseInt(page) - 1}`);
   };
   const nextPage = () => {
-    if (indexPage < maxPage - 1) setIndexPage(indexPage + 1);
+    if (page < maxPage) history.push(`/project/page/${parseInt(page) + 1}`);
   };
   const addProject = () => history.push('/create-project');
   const listElement = projects
-    .filter((element, index) => index >= indexPage * LIMIT && index < (indexPage + 1) * LIMIT)
+    .filter((element, index) => index >= (page - 1) * LIMIT && index < page * LIMIT)
     .map((element, index) => (
       <tr
         className='rowTable'
-        key={index + indexPage * LIMIT}
+        key={index + (page - 1) * LIMIT}
         onClick={() => handleDetail(element.id)}
       >
         <td className='py-3 px-6'>
           <div className='dataTable'>
-            <span>{index + 1 + indexPage * LIMIT}</span>
+            <span>{index + 1 + (page - 1) * LIMIT}</span>
           </div>
         </td>
         <td className='py-3 px-6'>
@@ -76,7 +77,7 @@ export const Project = ({ page }) => {
               <i className='fas fa-long-arrow-left'></i>
             </button>
           </div>
-          <div className='col-span-1 px-2'>{indexPage + 1}</div>
+          <div className='col-span-1 px-2'>{page}</div>
           <div className='col-span-1'>
             <button onClick={nextPage} className='focus:outline-none'>
               <i className='fas fa-long-arrow-right pl-2'></i>

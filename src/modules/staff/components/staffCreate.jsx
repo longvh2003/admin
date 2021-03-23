@@ -68,7 +68,7 @@ export const StaffCreate = () => {
   };
   const dispatch = useDispatch();
   const history = useHistory();
-  const handleCancel = () => history.push('staff');
+  const handleCancel = () => history.push('staff/page/1');
   const handleAdd = () => {
     const detail = {
       name,
@@ -102,7 +102,7 @@ export const StaffCreate = () => {
         element => element.name === detail.name && element.description === detail.description,
       ).length === 0) {
         dispatch(addStaff(detail, TABLE_NAME));
-        history.push('staff');
+        history.push('staff/page/1');
       }
       else alert('Type staff already exist!!!');
     }
