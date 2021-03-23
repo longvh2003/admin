@@ -1,23 +1,24 @@
-import * as CONSTANS from './customer.constants';
+import { DELETE_CUSTOMER, GET_CUSTOMER, UPDATE_CUSTOMER, ADD_CUSTOMER }
+  from 'src/modules/customer/customer.constants';
 
 export const delCustomer = () => {
   return {
-    type: CONSTANS.DELETE_CUSTOMER,
+    type: DELETE_CUSTOMER,
   };
 };
 export const getCustomer = data => {
   return {
-    type: CONSTANS.GET_CUSTOMER,
+    type: GET_CUSTOMER,
     payload: data,
   };
 };
 export const updateACustomer = () => {
   return {
-    type: CONSTANS.UPDATE_CUSTOMER,
+    type: UPDATE_CUSTOMER,
   };
 };
 export const addACustomer = () => {
   return {
-    type: CONSTANS.ADD_CUSTOMER,
+    type: ADD_CUSTOMER,
   };
 };

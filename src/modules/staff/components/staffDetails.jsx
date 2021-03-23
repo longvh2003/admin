@@ -1,14 +1,14 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { TABLE_NAME, TECH_STACK, PROJECT } from '../staff.constants';
+import { TABLE_NAME, TECH_STACK, PROJECT } from 'src/modules/staff/staff.constants';
 import { useDispatch } from 'react-redux';
-import { delAStaff } from '../staff.services';
+import { delAStaff } from 'src/modules/staff/staff.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData, getIndex } from '../../../utils/utils';
-import { EditStaff } from './EditStaff';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData, getIndex } from 'src/utils/utils';
+import { EditStaff } from 'src/modules/staff/components/EditStaff';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const StaffDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);
@@ -89,7 +89,8 @@ export const StaffDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
+                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}
+                    className='cursor-pointer'>
                     <i className='fas fa-atlas pr-2'></i>
                     {element}
                   </li>
@@ -104,7 +105,8 @@ export const StaffDetail = () => {
             <ul>
               {detail.projects !== undefined
                 ? detail.projects.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, PROJECT)}>
+                  <li key={index} onClick={() => handleDetail(element, PROJECT)}
+                    className='cursor-pointer'>
                     <i className='fas fa-tasks pr-2'></i>
                     {element}
                   </li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Background from '../../assets/images/loginImg.jpg';
+import Background from 'src/assets/images/loginImg.jpg';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 

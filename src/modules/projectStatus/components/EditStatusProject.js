@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { TABLE_NAME } from '../statusProject.constants';
-import { updateStatusProject } from '../statusProject.services';
+import { getData } from 'src/utils/utils';
+import { TABLE_NAME } from 'src/modules/projectStatus/statusProject.constants';
+import { updateStatusProject } from 'src/modules/projectStatus/statusProject.services';
 
 export const EditStatusProject = ({ index, detail, cancel }) => {
   const [name, setName] = useState(detail.name);

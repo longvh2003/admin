@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { TABLE_NAME } from '../techStack.constants';
-import { updateTechStack } from '../techStack.services';
+import { getData } from 'src/utils/utils';
+import { TABLE_NAME } from 'src/modules/techStack/techStack.constants';
+import { updateTechStack } from 'src/modules/techStack/techStack.services';
 
 export const EditTechStack = ({ index, detail, cancel }) => {
   const [name, setName] = useState(detail.name);

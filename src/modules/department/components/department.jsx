@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { getAllDepartment } from '../department.services';
-import { TABLE_NAME, LIMIT } from '../department.constants';
+import { getData } from 'src/utils/utils';
+import { getAllDepartment } from 'src/modules/department/department.services';
+import { TABLE_NAME, LIMIT } from 'src/modules/department/department.constants';
 import { useHistory } from 'react-router-dom';
 
 export const Department = () => {

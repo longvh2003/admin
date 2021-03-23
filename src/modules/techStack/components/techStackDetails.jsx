@@ -1,14 +1,14 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { TABLE_NAME } from '../techStack.constants';
+import { TABLE_NAME } from 'src/modules/techStack/techStack.constants';
 import { useDispatch } from 'react-redux';
-import { delATechStack } from '../techStack.services';
+import { delATechStack } from 'src/modules/techStack/techStack.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData } from '../../../utils/utils';
-import { EditTechStack } from './EditTechStack';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
+import { EditTechStack } from 'src/modules/techStack/components/EditTechStack';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const TechStackDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);

@@ -1,4 +1,4 @@
-import { Login } from '../../modules/main/login';
+import { Login } from 'src/modules/main/login';
 import React from 'react';
 export const LoginPage = () => {
   return <Login />;

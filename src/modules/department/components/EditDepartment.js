@@ -1,10 +1,11 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
-import { getData } from '../../../utils/utils';
-import { TABLE_NAME, TECH_STACK, STAFF, PROJECT } from '../department.constants';
-import { updateDepartment } from '../department.services';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
+import { TABLE_NAME, TECH_STACK, STAFF, PROJECT }
+  from 'src/modules/department/department.constants';
+import { updateDepartment } from 'src/modules/department/department.services';
 
 export const EditDepartment = ({ index, detail, cancel }) => {
   const [name, setName] = useState(detail.name);
@@ -140,7 +141,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
         <div className='groupData'>
           <label>Tech Stack :</label>
           <div
-            className='inputDetail h-10'
+            className='inputDetail h-10 cursor-pointer'
             onClick={() => {
               setIsOpenTechStack(!isOpenTechStack);
             }}
@@ -183,7 +184,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
         <div className='groupData'>
           <label>Staff :</label>
           <div
-            className='inputDetail h-10'
+            className='inputDetail h-10 cursor-pointer'
             onClick={() => {
               setIsOpenStaff(!isOpenStaff);
             }}
@@ -226,7 +227,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
         <div className='groupData'>
           <label>Project :</label>
           <div
-            className='inputDetail h-10'
+            className='inputDetail h-10 cursor-pointer'
             onClick={() => {
               setIsOpenProject(!isOpenProject);
             }}

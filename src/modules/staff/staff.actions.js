@@ -1,23 +1,24 @@
-import * as CONSTANS from './staff.constants';
+import { DELETE_STAFF, GET_STAFF, UPDATE_STAFF, ADD_STAFF }
+  from 'src/modules/staff/staff.constants';
 
 export const delStaff = () => {
   return {
-    type: CONSTANS.DELETE_STAFF,
+    type: DELETE_STAFF,
   };
 };
 export const getStaff = data => {
   return {
-    type: CONSTANS.GET_STAFF,
+    type: GET_STAFF,
     payload: data,
   };
 };
 export const updateAStaff = () => {
   return {
-    type: CONSTANS.UPDATE_STAFF,
+    type: UPDATE_STAFF,
   };
 };
 export const addAStaff = () => {
   return {
-    type: CONSTANS.ADD_STAFF,
+    type: ADD_STAFF,
   };
 };

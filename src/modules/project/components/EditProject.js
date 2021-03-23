@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
-import { getData } from '../../../utils/utils';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
 import {
   TABLE_NAME,
   TYPE_PROJECT,
@@ -192,7 +192,7 @@ export const EditProject = ({ index, detail, cancel }) => {
           <div className='groupData'>
             <label>Type Project :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenTypeProject(!isOpenTypeProject);
               }}
@@ -235,7 +235,7 @@ export const EditProject = ({ index, detail, cancel }) => {
           <div className='groupData'>
             <label>Status Project :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenStatusProject(!isOpenStatusProject);
               }}
@@ -279,7 +279,7 @@ export const EditProject = ({ index, detail, cancel }) => {
           <div className='groupData'>
             <label>Tech Stack :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
@@ -322,7 +322,7 @@ export const EditProject = ({ index, detail, cancel }) => {
           <div className='groupData'>
             <label>Department :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenDepartment(!isOpenDepartment);
               }}
@@ -365,7 +365,7 @@ export const EditProject = ({ index, detail, cancel }) => {
           <div className='groupData'>
             <label>Staff :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenStaff(!isOpenStaff);
               }}

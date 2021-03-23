@@ -3,8 +3,8 @@ import {
   getStatusProject,
   updateAStatusProject,
   addAStatusProject,
-} from './statusProject.actions';
-import { delData, updateData, addData } from '../../utils/utils';
+} from 'src/modules/projectStatus/statusProject.actions';
+import { delData, updateData, addData } from 'src/utils/utils';
 
 export const delAStatusProject = (index, TABLE_NAME) => dispatch => {
   if (TABLE_NAME) {

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
-import { getData } from '../../../utils/utils';
-import { TABLE_NAME, TECH_STACK, PROJECT } from '../staff.constants';
-import { updateStaff } from '../staff.services';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
+import { validId, validName, validPhoneNumber } from 'src/services/regex';
+import { getData } from 'src/utils/utils';
+import { TABLE_NAME, TECH_STACK, PROJECT } from 'src/modules/staff/staff.constants';
+import { updateStaff } from 'src/modules/staff/staff.services';
 
 export const EditStaff = ({ index, detail, cancel }) => {
   const [name, setName] = useState(detail.name);
@@ -28,6 +29,10 @@ export const EditStaff = ({ index, detail, cancel }) => {
   const [isAddressFilled, setAddressFilled] = useState(true);
   const [isTechStackFilled, setTechStackFilled] = useState(true);
   const [isProjectFilled, setProjectFilled] = useState(true);
+
+  const [isValidName, setValidName] = useState(true);
+  const [isValidId, setValidId] = useState(true);
+  const [isValidPhoneNumber, setValidPhoneNumber] = useState(true);
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -81,9 +86,17 @@ export const EditStaff = ({ index, detail, cancel }) => {
     else setTechStackFilled(true);
     if (projects.length === 0) setProjectFilled(false);
     else setProjectFilled(true);
+    if (validName(name) !== null) setValidName(true);
+    else setValidName(false);
+    if (validId(identificationNumber) !== null) setValidId(true);
+    else setValidId(false);
+    if (validPhoneNumber(phoneNumber) !== null) setValidPhoneNumber(true);
+    else setValidPhoneNumber(false);
     if (name !== '' && date !== '' && identificationNumber !== '' &&
     phoneNumber !== '' && address !== '' &&
-    techStacks.length !== 0 && projects.length !== 0) {
+    techStacks.length !== 0 && projects.length !== 0 &&
+    validName(name) !== null && validId(identificationNumber) !== null &&
+    validPhoneNumber(phoneNumber) !== null) {
       const staff = {
         name,
         date,
@@ -118,6 +131,8 @@ export const EditStaff = ({ index, detail, cancel }) => {
               autoFocus
             />
           </div>
+          {!isValidName
+            ? <div className='text-red-600'>Only letter</div> : null}
           {!isNameFilled
             ? <div className='text-red-600'>Please fill in name</div> : null}
           <div className='groupData'>
@@ -142,6 +157,8 @@ export const EditStaff = ({ index, detail, cancel }) => {
               onChange={handleChangeId}
             />
           </div>
+          {!isValidId
+            ? <div className='text-red-600'>Two digit number</div> : null}
           {!isIdentificationNumberFilled
             ? <div className='text-red-600'>Please fill in identification number</div> : null}
           <div className='groupData'>
@@ -154,6 +171,8 @@ export const EditStaff = ({ index, detail, cancel }) => {
               onChange={handleChangePhoneNumber}
             />
           </div>
+          {!isValidPhoneNumber
+            ? <div className='text-red-600'>The phone number is invalid (xxx-xxx-xxxx)</div> : null}
           {!isPhoneNumberFilled
             ? <div className='text-red-600'>Please fill in phone number</div> : null}
           <div className='groupData'>
@@ -171,7 +190,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
           <div className='groupData'>
             <label>Tech Stack :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
@@ -214,7 +233,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
           <div className='groupData'>
             <label>Project :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenProject(!isOpenProject);
               }}

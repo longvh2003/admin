@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TABLE_NAME } from '../customer.constants';
-import { addCustomer } from '../customer.services';
+import { TABLE_NAME } from 'src/modules/customer/customer.constants';
+import { addCustomer } from 'src/modules/customer/customer.services';
 import { useHistory } from 'react-router-dom';
-import { getData } from '../../../utils/utils';
+import { getData } from 'src/utils/utils';
 
 export const CustomerCreate = () => {
   const [name, setName] = useState('');

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TABLE_NAME } from '../typeProject.constants';
-import { addTypeProject } from '../typeProject.services';
+import { TABLE_NAME } from 'src/modules/typeProjects/typeProject.constants';
+import { addTypeProject } from 'src/modules/typeProjects/typeProject.services';
 import { useHistory } from 'react-router-dom';
-import { getData } from '../../../utils/utils';
+import { getData } from 'src/utils/utils';
 
 export const TypeProjectCreate = () => {
   const [name, setName] = useState('');

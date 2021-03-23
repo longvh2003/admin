@@ -1,14 +1,14 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { TABLE_NAME } from '../customer.constants';
+import { TABLE_NAME } from 'src/modules/customer/customer.constants';
 import { useDispatch } from 'react-redux';
-import { delACustomer } from '../customer.services';
+import { delACustomer } from 'src/modules/customer/customer.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData } from '../../../utils/utils';
-import { EditCustomer } from './EditCustomer';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
+import { EditCustomer } from 'src/modules/customer/components/EditCustomer';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const CustomerDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);

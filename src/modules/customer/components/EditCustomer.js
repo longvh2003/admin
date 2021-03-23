@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { TABLE_NAME } from '../customer.constants';
-import { updateCustomer } from '../customer.services';
+import { getData } from 'src/utils/utils';
+import { TABLE_NAME } from 'src/modules/customer/customer.constants';
+import { updateCustomer } from 'src/modules/customer/customer.services';
 
 export const EditCustomer = ({ index, detail, cancel }) => {
   const [name, setName] = useState(detail.name);

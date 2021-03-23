@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { getAllCustomer } from '../customer.services';
-import { TABLE_NAME, LIMIT } from '../customer.constants';
+import { getData } from 'src/utils/utils';
+import { getAllCustomer } from 'src/modules/customer/customer.services';
+import { TABLE_NAME, LIMIT } from 'src/modules/customer/customer.constants';
 import { useHistory } from 'react-router-dom';
 
 export const Customer = () => {

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { getAllStaff } from '../staff.services';
-import { TABLE_NAME, LIMIT } from '../staff.constants';
+import { getData } from 'src/utils/utils';
+import { getAllStaff } from 'src/modules/staff/staff.services';
+import { TABLE_NAME, LIMIT } from 'src/modules/staff/staff.constants';
 import { useHistory } from 'react-router-dom';
 
 export const Staff = () => {

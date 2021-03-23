@@ -1,11 +1,12 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TABLE_NAME, TECH_STACK, STAFF, PROJECT } from '../department.constants';
-import { addDepartment } from '../department.services';
+import { TABLE_NAME, TECH_STACK, STAFF, PROJECT }
+  from 'src/modules/department/department.constants';
+import { addDepartment } from 'src/modules/department/department.services';
 import { useHistory } from 'react-router-dom';
-import { getData } from '../../../utils/utils';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const DepartmentCreate = () => {
   const [name, setName] = useState('');
@@ -140,7 +141,7 @@ export const DepartmentCreate = () => {
         <div className='groupData'>
           <label>Tech Stack :</label>
           <div
-            className='inputDetail h-10'
+            className='inputDetail h-10 cursor-pointer'
             onClick={() => {
               setIsOpenTechStack(!isOpenTechStack);
             }}
@@ -183,7 +184,7 @@ export const DepartmentCreate = () => {
         <div className='groupData'>
           <label>Staff :</label>
           <div
-            className='inputDetail h-10'
+            className='inputDetail h-10 cursor-pointer'
             onClick={() => {
               setIsOpenStaff(!isOpenStaff);
             }}
@@ -226,7 +227,7 @@ export const DepartmentCreate = () => {
         <div className='groupData'>
           <label>Project :</label>
           <div
-            className='inputDetail h-10'
+            className='inputDetail h-10 cursor-pointer'
             onClick={() => {
               setIsOpenProject(!isOpenProject);
             }}

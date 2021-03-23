@@ -18,7 +18,7 @@
     @apply w-full bg-gray-700 hover:bg-gray-800 text-gray-300 hover:text-white py-2 pl-4 rounded-l text-left
 }
 .rowTable{
-    @apply border-b border-gray-200 hover:bg-gray-100
+    @apply border-b border-gray-200 hover:bg-gray-100 cursor-pointer
 }
 .rowHeader{
     @apply bg-gray-200 text-gray-600 uppercase text-sm leading-normal
@@ -57,7 +57,7 @@
     @apply flex flex-col
 }
 .select{
-    @apply flex w-full items-center p-2 pl-2 border border-gray-300 rounded-md relative focus:outline-none
+    @apply flex w-full items-center p-2 pl-2 border border-gray-300 rounded-md relative focus:outline-none cursor-pointer
 }
 .listSelect{
     @apply border w-full border-gray-500 focus:outline-none bg-gray-200

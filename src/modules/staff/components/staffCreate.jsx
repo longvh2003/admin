@@ -1,11 +1,12 @@
 import React from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TABLE_NAME, TECH_STACK, PROJECT } from '../staff.constants';
-import { addStaff } from '../staff.services';
+import { TABLE_NAME, TECH_STACK, PROJECT } from 'src/modules/staff/staff.constants';
+import { addStaff } from 'src/modules/staff/staff.services';
 import { useHistory } from 'react-router-dom';
-import { getData } from '../../../utils/utils';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
+import { validId, validName, validPhoneNumber } from 'src/services/regex';
 
 export const StaffCreate = () => {
   const [name, setName] = useState('');
@@ -29,6 +30,10 @@ export const StaffCreate = () => {
   const [isAddressFilled, setAddressFilled] = useState(true);
   const [isTechStackFilled, setTechStackFilled] = useState(true);
   const [isProjectFilled, setProjectFilled] = useState(true);
+
+  const [isValidName, setValidName] = useState(true);
+  const [isValidId, setValidId] = useState(true);
+  const [isValidPhoneNumber, setValidPhoneNumber] = useState(true);
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -95,9 +100,17 @@ export const StaffCreate = () => {
     else setTechStackFilled(true);
     if (projects.length === 0) setProjectFilled(false);
     else setProjectFilled(true);
+    if (validName(name) !== null) setValidName(true);
+    else setValidName(false);
+    if (validId(identificationNumber) !== null) setValidId(true);
+    else setValidId(false);
+    if (validPhoneNumber(phoneNumber) !== null) setValidPhoneNumber(true);
+    else setValidPhoneNumber(false);
     if (name !== '' && date !== '' && identificationNumber !== '' &&
     phoneNumber !== '' && address !== '' &&
-    techStacks.length !== 0 && projects.length !== 0) {
+    techStacks.length !== 0 && projects.length !== 0 &&
+    validName(name) !== null && validId(identificationNumber) !== null &&
+    validPhoneNumber(phoneNumber) !== null) {
       if (data.filter(
         element => element.name === detail.name && element.description === detail.description,
       ).length === 0) {
@@ -127,6 +140,8 @@ export const StaffCreate = () => {
               autoFocus
             />
           </div>
+          {!isValidName
+            ? <div className='text-red-600'>Only letter</div> : null}
           {!isNameFilled
             ? <div className='text-red-600'>Please fill in name</div> : null}
           <div className='groupData'>
@@ -151,6 +166,8 @@ export const StaffCreate = () => {
               onChange={handleChangeId}
             />
           </div>
+          {!isValidId
+            ? <div className='text-red-600'>Two digit number</div> : null}
           {!isIdentificationNumberFilled
             ? <div className='text-red-600'>Please fill in identification number</div> : null}
           <div className='groupData'>
@@ -163,6 +180,8 @@ export const StaffCreate = () => {
               onChange={handleChangePhoneNumber}
             />
           </div>
+          {!isValidPhoneNumber
+            ? <div className='text-red-600'>The phone number is invalid (xxx-xxx-xxxx)</div> : null}
           {!isPhoneNumberFilled
             ? <div className='text-red-600'>Please fill in phone number</div> : null}
           <div className='groupData'>
@@ -180,7 +199,7 @@ export const StaffCreate = () => {
           <div className='groupData'>
             <label>Tech Stack :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
@@ -223,7 +242,7 @@ export const StaffCreate = () => {
           <div className='groupData'>
             <label>Project :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenProject(!isOpenProject);
               }}

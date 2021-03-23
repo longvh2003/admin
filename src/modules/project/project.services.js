@@ -1,5 +1,6 @@
-import { delProject, getProject, updateAProject, addAProject } from './project.actions';
-import { delData, updateData, addData } from '../../utils/utils';
+import { delProject, getProject, updateAProject, addAProject }
+  from 'src/modules/project/project.actions';
+import { delData, updateData, addData } from 'src/utils/utils';
 
 export const delAProject = (index, TABLE_NAME) => dispatch => {
   if (TABLE_NAME) {

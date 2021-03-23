@@ -1,5 +1,5 @@
-import { delStaff, getStaff, updateAStaff, addAStaff } from './staff.actions';
-import { delData, updateData, addData } from '../../utils/utils';
+import { delStaff, getStaff, updateAStaff, addAStaff } from 'src/modules/staff/staff.actions';
+import { delData, updateData, addData } from 'src/utils/utils';
 
 export const delAStaff = (index, TABLE_NAME) => dispatch => {
   if (TABLE_NAME) {

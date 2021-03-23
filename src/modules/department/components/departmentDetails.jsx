@@ -1,14 +1,15 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { PROJECT, STAFF, TABLE_NAME, TECH_STACK } from '../department.constants';
+import { PROJECT, STAFF, TABLE_NAME, TECH_STACK }
+  from 'src/modules/department/department.constants';
 import { useDispatch } from 'react-redux';
-import { delADepartment } from '../department.services';
+import { delADepartment } from 'src/modules/department/department.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData, getIndex } from '../../../utils/utils';
-import { EditDepartment } from './EditDepartment';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData, getIndex } from 'src/utils/utils';
+import { EditDepartment } from 'src/modules/department/components/EditDepartment';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const DepartmentDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);
@@ -80,7 +81,8 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
+                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}
+                    className='cursor-pointer'>
                     <i className='fas fa-atlas pr-2'></i>
                     {element}
                   </li>
@@ -95,7 +97,8 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.staffs !== undefined
                 ? detail.staffs.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, STAFF)}>
+                  <li key={index} onClick={() => handleDetail(element, STAFF)}
+                    className='cursor-pointer'>
                     <i className='fas fa-user pr-2'></i>
                     {element}
                   </li>
@@ -110,7 +113,8 @@ export const DepartmentDetail = () => {
             <ul>
               {detail.projects !== undefined
                 ? detail.projects.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, PROJECT)}>
+                  <li key={index} onClick={() => handleDetail(element, PROJECT)}
+                    className='cursor-pointer'>
                     <i className='fas fa-tasks pr-2'></i>
                     {element}
                   </li>

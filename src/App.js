@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
-import { routes } from './router.config';
+import 'src/App.css';
+import { routes } from 'src/router.config';
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { LeftMenus } from './pages/main/leftMenu';
-import { LoginPage } from './pages/main/login';
+import { LeftMenus } from 'src/pages/main/leftMenu';
+import { LoginPage } from 'src/pages/main/login';
 
 function App() {
   const reactRouter = () => {

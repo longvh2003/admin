@@ -1,5 +1,6 @@
-import { delCustomer, getCustomer, updateACustomer, addACustomer } from './customer.actions';
-import { delData, updateData, addData } from '../../utils/utils';
+import { delCustomer, getCustomer, updateACustomer, addACustomer }
+  from 'src/modules/customer/customer.actions';
+import { delData, updateData, addData } from 'src/utils/utils';
 
 export const delACustomer = (index, TABLE_NAME) => dispatch => {
   if (TABLE_NAME) {

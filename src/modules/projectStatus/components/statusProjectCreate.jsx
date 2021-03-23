@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TABLE_NAME } from '../statusProject.constants';
-import { addStatusProject } from '../statusProject.services';
+import { TABLE_NAME } from 'src/modules/projectStatus/statusProject.constants';
+import { addStatusProject } from 'src/modules/projectStatus/statusProject.services';
 import { useHistory } from 'react-router-dom';
-import { getData } from '../../../utils/utils';
+import { getData } from 'src/utils/utils';
 
 export const StatusProjectCreate = () => {
   const [name, setName] = useState('');

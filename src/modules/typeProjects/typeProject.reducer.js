@@ -1,5 +1,6 @@
 import produce from 'immer';
-import * as CONSTANS from './typeProject.constants';
+import { DELETE_TYPE_PROJECT, ADD_TYPE_PROJECT,
+  GET_TYPE_PROJECT, UPDATE_TYPE_PROJECT } from 'src/modules/typeProjects/typeProject.constants';
 
 const initState = {
   page: 0,
@@ -8,16 +9,16 @@ const initState = {
 export const projectTypeReducer = (state = initState, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case CONSTANS.DELETE_TYPE_PROJECT:
+      case DELETE_TYPE_PROJECT:
         break;
-      case CONSTANS.ADD_TYPE_PROJECT:
+      case ADD_TYPE_PROJECT:
         break;
-      case CONSTANS.GET_TYPE_PROJECT:
+      case GET_TYPE_PROJECT:
         draft.data = action.payload;
         if (action.payload.length % 3 === 0) draft.page = action.payload.length / 3;
         else draft.page = ~~(action.payload.length / 3) + 1;
         break;
-      case CONSTANS.UPDATE_TYPE_PROJECT:
+      case UPDATE_TYPE_PROJECT:
         break;
       default:
         return state;

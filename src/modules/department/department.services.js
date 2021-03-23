@@ -4,8 +4,8 @@ import {
   updateADepartment,
   addADepartment,
 } from './department.actions';
-import { delData, updateData, addData } from '../../utils/utils';
-import { TABLE_NAME } from './department.constants';
+import { delData, updateData, addData } from 'src/utils/utils';
+import { TABLE_NAME } from 'src/modules/department/department.constants';
 
 export const delADepartment = (index, TABLE_NAME) => dispatch => {
   if (TABLE_NAME) {

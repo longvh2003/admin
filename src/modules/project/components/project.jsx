@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { getAllProject } from '../project.services';
-import { TABLE_NAME, LIMIT } from '../project.constants';
+import { getData } from 'src/utils/utils';
+import { getAllProject } from 'src/modules/project/project.services';
+import { TABLE_NAME, LIMIT } from 'src/modules/project/project.constants';
 import { useHistory } from 'react-router-dom';
 
 export const Project = () => {

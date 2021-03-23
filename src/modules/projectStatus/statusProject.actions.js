@@ -1,23 +1,24 @@
-import * as CONSTANS from './statusProject.constants';
+import { DELETE_STATUS_PROJECT, GET_STATUS_PROJECT, UPDATE_STATUS_PROJECT, ADD_STATUS_PROJECT }
+  from 'src/modules/projectStatus/statusProject.constants';
 
 export const delStatusProject = () => {
   return {
-    type: CONSTANS.DELETE_STATUS_PROJECT,
+    type: DELETE_STATUS_PROJECT,
   };
 };
 export const getStatusProject = data => {
   return {
-    type: CONSTANS.GET_STATUS_PROJECT,
+    type: GET_STATUS_PROJECT,
     payload: data,
   };
 };
 export const updateAStatusProject = () => {
   return {
-    type: CONSTANS.UPDATE_STATUS_PROJECT,
+    type: UPDATE_STATUS_PROJECT,
   };
 };
 export const addAStatusProject = () => {
   return {
-    type: CONSTANS.ADD_STATUS_PROJECT,
+    type: ADD_STATUS_PROJECT,
   };
 };

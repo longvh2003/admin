@@ -1,14 +1,14 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { TABLE_NAME } from '../statusProject.constants';
+import { TABLE_NAME } from 'src/modules/projectStatus/statusProject.constants';
 import { useDispatch } from 'react-redux';
-import { delAStatusProject } from '../statusProject.services';
+import { delAStatusProject } from 'src/modules/projectStatus/statusProject.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData } from '../../../utils/utils';
-import { EditStatusProject } from './EditStatusProject';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
+import { EditStatusProject } from 'src/modules/projectStatus/components/EditStatusProject';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const StatusProjectDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);

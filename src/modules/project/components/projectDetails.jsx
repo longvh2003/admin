@@ -10,12 +10,12 @@ import {
   TYPE_PROJECT,
 } from '../project.constants';
 import { useDispatch } from 'react-redux';
-import { delAProject } from '../project.services';
+import { delAProject } from 'src/modules/project/project.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getData, getIndex } from '../../../utils/utils';
-import { EditProject } from './EditProject';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData, getIndex } from 'src/utils/utils';
+import { EditProject } from 'src/modules/project/components/EditProject';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const ProjectDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);
@@ -94,7 +94,8 @@ export const ProjectDetail = () => {
             <ul>
               {detail.typeProjects !== undefined
                 ? detail.typeProjects.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, TYPE_PROJECT)}>
+                  <li key={index} onClick={() => handleDetail(element, TYPE_PROJECT)}
+                    className='cursor-pointer'>
                     <i className='fas fa-stream pr-2'></i>
                     {element}
                   </li>
@@ -109,7 +110,8 @@ export const ProjectDetail = () => {
             <ul>
               {detail.statusProjects !== undefined
                 ? detail.statusProjects.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, STATUS_PROJECT)}>
+                  <li key={index} onClick={() => handleDetail(element, STATUS_PROJECT)}
+                    className='cursor-pointer'>
                     <i className='fas fa-file-alt pr-2'></i>
                     {element}
                   </li>
@@ -124,7 +126,8 @@ export const ProjectDetail = () => {
             <ul>
               {detail.techStacks !== undefined
                 ? detail.techStacks.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}>
+                  <li key={index} onClick={() => handleDetail(element, TECH_STACK)}
+                    className='cursor-pointer'>
                     <i className='fas fa-atlas pr-2'></i>
                     {element}
                   </li>
@@ -139,7 +142,8 @@ export const ProjectDetail = () => {
             <ul>
               {detail.departments !== undefined
                 ? detail.departments.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, DEPARTMENT)}>
+                  <li key={index} onClick={() => handleDetail(element, DEPARTMENT)}
+                    className='cursor-pointer'>
                     <i className='fas fa-code-branch pr-2'></i>
                     {element}
                   </li>
@@ -154,7 +158,8 @@ export const ProjectDetail = () => {
             <ul>
               {detail.staffs !== undefined
                 ? detail.staffs.map((element, index) => (
-                  <li key={index} onClick={() => handleDetail(element, STAFF)}>
+                  <li key={index} onClick={() => handleDetail(element, STAFF)}
+                    className='cursor-pointer'>
                     <i className='fas fa-user pr-2'></i>
                     {element}
                   </li>

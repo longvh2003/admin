@@ -21,7 +21,7 @@ export const addData = (detail, table) => {
 export const getIndex = (detail, table) => {
   const data = getData(table);
   const tmp = data.filter(element => element.name === detail);
-  return data.indexOf(tmp[0]);
+  return tmp[0].id;
 };
 export const getDetail = (index, table) => {
   const data = getData(table);

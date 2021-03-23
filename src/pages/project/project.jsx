@@ -1,4 +1,4 @@
-import { Project } from '../../modules/project/components/project';
+import { Project } from 'src/modules/project/components/project';
 import React from 'react';
 export const Projects = () => {
   return <Project />;

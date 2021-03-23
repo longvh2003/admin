@@ -3,8 +3,8 @@ import {
   getTypeProject,
   updateATypeProject,
   addATypeProject,
-} from './typeProject.actions';
-import { delData, updateData, addData } from '../../utils/utils';
+} from 'src/modules/typeProjects/typeProject.actions';
+import { delData, updateData, addData } from 'src/utils/utils';
 
 export const delATypeProject = (index, TABLE_NAME) => dispatch => {
   if (TABLE_NAME) {

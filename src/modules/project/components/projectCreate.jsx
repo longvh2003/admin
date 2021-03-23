@@ -8,11 +8,11 @@ import {
   TECH_STACK,
   DEPARTMENT,
   STAFF,
-} from '../project.constants';
-import { addProject } from '../project.services';
+} from 'src/modules/project/project.constants';
+import { addProject } from 'src/modules/project/project.services';
 import { useHistory } from 'react-router-dom';
-import { getData } from '../../../utils/utils';
-import { handleOutsideClick } from '../../../services/handleOutsideClick';
+import { getData } from 'src/utils/utils';
+import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const ProjectCreate = () => {
   const [name, setName] = useState('');
@@ -184,7 +184,7 @@ export const ProjectCreate = () => {
           <div className='groupData'>
             <label>Type Project :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenTypeProject(!isOpenTypeProject);
               }}
@@ -228,7 +228,7 @@ export const ProjectCreate = () => {
           <div className='groupData'>
             <label>Status Project :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenStatusProject(!isOpenStatusProject);
               }}
@@ -272,7 +272,7 @@ export const ProjectCreate = () => {
           <div className='groupData'>
             <label>Tech Stack :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenTechStack(!isOpenTechStack);
               }}
@@ -316,7 +316,7 @@ export const ProjectCreate = () => {
           <div className='groupData'>
             <label>Department :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenDepartment(!isOpenDepartment);
               }}
@@ -360,7 +360,7 @@ export const ProjectCreate = () => {
           <div className='groupData'>
             <label>Staff :</label>
             <div
-              className='inputDetail h-10'
+              className='inputDetail h-10 cursor-pointer'
               onClick={() => {
                 setIsOpenStaff(!isOpenStaff);
               }}

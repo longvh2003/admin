@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Avatar from '../../assets/images/avatar.jpg';
-import { UserDetail } from '../../pages/main/user';
+import Avatar from 'src/assets/images/avatar.jpg';
+import { UserDetail } from 'src/pages/main/user';
 
 export const LeftMenu = () => {
   const [user, setUser] = useState(false);

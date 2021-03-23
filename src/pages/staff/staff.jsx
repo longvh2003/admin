@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Staff } from '../../modules/staff/components/staff';
+import { Staff } from 'src/modules/staff/components/staff';
 export const Staffs = () => {
   return <Staff />;
 };

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getData } from '../../../utils/utils';
-import { getAllTechStack } from '../techStack.services';
-import { TABLE_NAME, LIMIT } from '../techStack.constants';
+import { getData } from 'src/utils/utils';
+import { getAllTechStack } from 'src/modules/techStack/techStack.services';
+import { TABLE_NAME, LIMIT } from 'src/modules/techStack/techStack.constants';
 import { useHistory } from 'react-router-dom';
 
 export const TechStack = () => {
