@@ -1,24 +1,42 @@
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { handleOutsideClick } from 'src/services/handleOutsideClick';
 import { getData } from 'src/utils/utils';
 import { TABLE_NAME, TECH_STACK, STAFF, PROJECT }
   from 'src/modules/department/department.constants';
 import { updateDepartment } from 'src/modules/department/department.services';
+import { useParams, useHistory } from 'react-router-dom';
 
-export const EditDepartment = ({ index, detail, cancel }) => {
-  const [name, setName] = useState(detail.name);
-  const [description, setDescription] = useState(detail.description);
-  const [techStacks, setTechStack] = useState(detail.techStacks);
-  const [staffs, setStaff] = useState(detail.staffs);
-  const [projects, setProject] = useState(detail.projects);
+export const EditDepartment = () => {
+  const history = useHistory();
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const data = getData(TABLE_NAME);
+    setDetail(data.filter(element => element.id === id)[0]);
+  }, []);
+
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [techStacks, setTechStack] = useState();
+  const [staffs, setStaff] = useState();
+  const [projects, setProject] = useState();
   const listTechStacks = getData(TECH_STACK);
   const [isOpenTechStack, setIsOpenTechStack] = useState(false);
   const listStaffs = getData(STAFF);
   const [isOpenStaff, setIsOpenStaff] = useState(false);
   const listProjects = getData(PROJECT);
   const [isOpenProject, setIsOpenProject] = useState(false);
+
+  useEffect(() => {
+    setName(detail.name);
+    setDescription(detail.description);
+    setTechStack(detail.techStacks);
+    setStaff(detail.staffs);
+    setProject(detail.projects);
+  }, [detail]);
+
   const refTechStack = useRef();
   const refStaff = useRef();
   const refProject = useRef();
@@ -98,8 +116,8 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             element.name === department.name && element.description === department.description,
         ).length === 0
       ) {
-        dispatch(updateDepartment(index, department, TABLE_NAME));
-        cancel(true);
+        dispatch(updateDepartment(id, department, TABLE_NAME));
+        history.push(`/department/detail/${id}`);
       }
       else alert('Type department already exist!!!');
     }
@@ -147,7 +165,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             }}
           >
             <div className='flex flex-auto flex-wrap'>
-              {techStacks.map((element, index) => (
+              {techStacks !== undefined ? techStacks.map((element, index) => (
                 <div
                   key={index}
                   onClick={e => {
@@ -158,7 +176,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
                 >
                   {element}
                 </div>
-              ))}
+              )) : null}
             </div>
           </div>
         </div>
@@ -190,7 +208,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             }}
           >
             <div className='flex flex-auto flex-wrap'>
-              {staffs.map((element, index) => (
+              {staffs !== undefined ? staffs.map((element, index) => (
                 <div
                   key={index}
                   onClick={e => {
@@ -201,7 +219,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
                 >
                   {element}
                 </div>
-              ))}
+              )) : null }
             </div>
           </div>
         </div>
@@ -233,7 +251,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
             }}
           >
             <div className='flex flex-auto flex-wrap'>
-              {projects.map((element, index) => (
+              {projects !== undefined ? projects.map((element, index) => (
                 <div
                   key={index}
                   onClick={e => {
@@ -244,7 +262,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
                 >
                   {element}
                 </div>
-              ))}
+              )) : null}
             </div>
           </div>
         </div>
@@ -269,7 +287,7 @@ export const EditDepartment = ({ index, detail, cancel }) => {
           ? <div className='text-red-600'>Please choose project</div> : null}
         <div>
           <div className='groupBtn'>
-            <button className='btnCancel' onClick={() => cancel(true)}>
+            <button className='btnCancel' onClick={() => history.push(`/department/detail/${id}`)}>
               <i className='fas fa-times px-3'></i>CANCEL
             </button>
             <button className='btnConfirm' onClick={handleSubmit}>

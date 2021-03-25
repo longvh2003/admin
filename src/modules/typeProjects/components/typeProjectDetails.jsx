@@ -7,12 +7,10 @@ import { delATypeProject } from 'src/modules/typeProjects/typeProject.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getData } from 'src/utils/utils';
-import { EditTypeProject } from 'src/modules/typeProjects/components/EditTypeProject';
 import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const TypeProjectDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(true);
   const [detail, setDetail] = useState({});
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,14 +18,14 @@ export const TypeProjectDetail = () => {
   useEffect(() => {
     const data = getData(TABLE_NAME);
     setDetail(data.filter(element => element.id === id)[0]);
-  }, [isUpdate]);
+  }, []);
   const deleteTypeProject = (index, TABLE_NAME) => {
     dispatch(delATypeProject(index, TABLE_NAME));
     history.push('/type-project/page/1');
   };
   const ref = useRef();
   handleOutsideClick(ref, () => { if (toggleDelete) setToggleDelete(false); });
-  return isUpdate ? (
+  return (
     <div className='relative'>
       {toggleDelete ? <div
         className='modalConfirm'
@@ -72,13 +70,11 @@ export const TypeProjectDetail = () => {
           <button className='btnCancel' onClick={() => setToggleDelete(true)}>
             <i className='fas fa-times px-3'></i>DELETE
           </button>
-          <button className='btnConfirm' onClick={() => setIsUpdate(false)}>
+          <button className='btnConfirm' onClick={() => history.push(`/type-project/edit/${id}`)}>
             UPDATE
           </button>
         </div>
       </div>
     </div>
-  ) : (
-    <EditTypeProject index={id} detail={detail} cancel={setIsUpdate} />
   );
 };

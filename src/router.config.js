@@ -1,24 +1,31 @@
-import { TypeProjects } from './pages/typeProjects/typeProjects';
-import { TypeProjectCreates } from './pages/typeProjects/typeProjectCreate';
-import { TypeProjectDetails } from './pages/typeProjects/typeProjectDetail';
-import { StatusProjects } from './pages/projectStatus/projectStatus';
-import { StatusProjectCreates } from './pages/projectStatus/projectStatusCreate';
-import { StatusProjectDetails } from './pages/projectStatus/projectStatusDetail';
-import { TechStacks } from './pages/techStack/techStack';
-import { TechStackCreates } from './pages/techStack/techStackCreate';
-import { TechStackDetails } from './pages/techStack/techStackDetail';
-import { Customers } from './pages/customer/customer';
-import { CustomerCreates } from './pages/customer/customerCreate';
-import { CustomerDetails } from './pages/customer/customerDetail';
-import { Departments } from './pages/department/department';
-import { DepartmentCreates } from './pages/department/departmentCreate';
-import { DepartmentDetails } from './pages/department/departmentDetail';
-import { Staffs } from './pages/staff/staff';
-import { StaffCreates } from './pages/staff/staffCreate';
-import { StaffDetails } from './pages/staff/staffDetail';
-import { Projects } from './pages/project/project';
-import { ProjectCreates } from './pages/project/projectCreate';
-import { ProjectDetails } from './pages/project/staffDetail';
+import { TypeProjects } from 'src/pages/typeProjects/typeProjects';
+import { TypeProjectCreates } from 'src/pages/typeProjects/typeProjectCreate';
+import { TypeProjectDetails } from 'src/pages/typeProjects/typeProjectDetail';
+import { EditTypeProjects } from 'src/pages/typeProjects/editTypeProject';
+import { StatusProjects } from 'src/pages/projectStatus/projectStatus';
+import { StatusProjectCreates } from 'src/pages/projectStatus/projectStatusCreate';
+import { StatusProjectDetails } from 'src/pages/projectStatus/projectStatusDetail';
+import { EditStatusProjects } from 'src/pages/projectStatus/editProjectStatus';
+import { TechStacks } from 'src/pages/techStack/techStack';
+import { TechStackCreates } from 'src/pages/techStack/techStackCreate';
+import { TechStackDetails } from 'src/pages/techStack/techStackDetail';
+import { EditTechStacks } from 'src/pages/techStack/editTechStack';
+import { Customers } from 'src/pages/customer/customer';
+import { CustomerCreates } from 'src/pages/customer/customerCreate';
+import { CustomerDetails } from 'src/pages/customer/customerDetail';
+import { EditCustomers } from 'src/pages/customer/editCustomer';
+import { Departments } from 'src/pages/department/department';
+import { DepartmentCreates } from 'src/pages/department/departmentCreate';
+import { DepartmentDetails } from 'src/pages/department/departmentDetail';
+import { EditDepartments } from 'src/pages/department/editDepartment';
+import { Staffs } from 'src/pages/staff/staff';
+import { StaffCreates } from 'src/pages/staff/staffCreate';
+import { StaffDetails } from 'src/pages/staff/staffDetail';
+import { EditStaffs } from 'src/pages/staff/ediStaff';
+import { Projects } from 'src/pages/project/project';
+import { ProjectCreates } from 'src/pages/project/projectCreate';
+import { ProjectDetails } from 'src/pages/project/projectDetail';
+import { EditProjects } from 'src/pages/project/editProject';
 
 export const routes = [
   {
@@ -32,8 +39,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/type-project/:id',
+    path: '/type-project/detail/:id',
     component: TypeProjectDetails,
+    exact: true,
+  },
+  {
+    path: '/type-project/edit/:id',
+    component: EditTypeProjects,
     exact: true,
   },
   {
@@ -47,8 +59,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/status-project/:id',
+    path: '/status-project/detail/:id',
     component: StatusProjectDetails,
+    exact: true,
+  },
+  {
+    path: '/status-project/edit/:id',
+    component: EditStatusProjects,
     exact: true,
   },
   {
@@ -62,8 +79,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/tech-stack/:id',
+    path: '/tech-stack/detail/:id',
     component: TechStackDetails,
+    exact: true,
+  },
+  {
+    path: '/tech-stack/edit/:id',
+    component: EditTechStacks,
     exact: true,
   },
   {
@@ -77,8 +99,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/customer/:id',
+    path: '/customer/detail/:id',
     component: CustomerDetails,
+    exact: true,
+  },
+  {
+    path: '/customer/edit/:id',
+    component: EditCustomers,
     exact: true,
   },
   {
@@ -92,8 +119,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/department/:id',
+    path: '/department/detail/:id',
     component: DepartmentDetails,
+    exact: true,
+  },
+  {
+    path: '/department/edit/:id',
+    component: EditDepartments,
     exact: true,
   },
   {
@@ -107,8 +139,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/staff/:id',
+    path: '/staff/detail/:id',
     component: StaffDetails,
+    exact: true,
+  },
+  {
+    path: '/staff/edit/:id',
+    component: EditStaffs,
     exact: true,
   },
   {
@@ -122,8 +159,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/project/:id',
+    path: '/project/detail/:id',
     component: ProjectDetails,
+    exact: true,
+  },
+  {
+    path: '/project/edit/:id',
+    component: EditProjects,
     exact: true,
   },
 ];

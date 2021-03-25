@@ -7,12 +7,10 @@ import { delACustomer } from 'src/modules/customer/customer.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getData } from 'src/utils/utils';
-import { EditCustomer } from 'src/modules/customer/components/EditCustomer';
 import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const CustomerDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(true);
   const [detail, setDetail] = useState({});
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,14 +18,14 @@ export const CustomerDetail = () => {
   useEffect(() => {
     const data = getData(TABLE_NAME);
     setDetail(data.filter(element => element.id === id)[0]);
-  }, [isUpdate]);
+  }, []);
   const deleteCustomer = (id, TABLE_NAME) => {
     dispatch(delACustomer(id, TABLE_NAME));
     history.push('/customer/page/1');
   };
   const ref = useRef();
   handleOutsideClick(ref, () => { if (toggleDelete) setToggleDelete(false); });
-  return isUpdate ? (
+  return (
     <div className='relative'>
       {toggleDelete ? <div
         className='modalConfirm'
@@ -72,13 +70,11 @@ export const CustomerDetail = () => {
           <button className='btnCancel' onClick={() => setToggleDelete(true)}>
             <i className='fas fa-times px-3'></i>DELETE
           </button>
-          <button className='btnConfirm' onClick={() => setIsUpdate(false)}>
+          <button className='btnConfirm' onClick={() => history.push(`/customer/edit/${id}`)}>
             UPDATE
           </button>
         </div>
       </div>
     </div>
-  ) : (
-    <EditCustomer index={id} detail={detail} cancel={setIsUpdate} />
   );
 };

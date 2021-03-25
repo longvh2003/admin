@@ -11,7 +11,7 @@ export const Project = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleDetail = index => {
-    history.push(`/project/${index}`);
+    history.push(`/project/detail/${index}`);
   };
   const projects = useSelector(state => state.project.data);
   const maxPage = useSelector(state => state.project.page);
@@ -34,12 +34,12 @@ export const Project = () => {
         key={index + (page - 1) * LIMIT}
         onClick={() => handleDetail(element.id)}
       >
-        <td className='py-3 px-6'>
+        <td className='py-3 px-14'>
           <div className='dataTable'>
             <span>{index + 1 + (page - 1) * LIMIT}</span>
           </div>
         </td>
-        <td className='py-3 px-6'>
+        <td className='py-3 px-12'>
           <div className='dataTable'>
             <span>{element.name}</span>
           </div>
@@ -62,8 +62,8 @@ export const Project = () => {
       <table className='w-full table-auto'>
         <thead>
           <tr className='rowHeader'>
-            <th className='headerTable'>No.</th>
-            <th className='headerTable'>Name</th>
+            <th className='py-3 text-left text-gray-600 px-14'>No.</th>
+            <th className='py-3 text-left text-gray-600 px-12'>Name</th>
             <th className='headerTable'>Description</th>
           </tr>
         </thead>

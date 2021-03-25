@@ -11,7 +11,7 @@ export const TypeProject = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleDetail = index => {
-    history.push(`/type-project/${index}`);
+    history.push(`/type-project/detail/${index}`);
   };
   const typeProjects = useSelector(state => state.projectType.data);
   const maxPage = useSelector(state => state.projectType.page);
@@ -35,7 +35,7 @@ export const TypeProject = () => {
           key={index + (page - 1) * LIMIT}
           onClick={() => handleDetail(element.id)}
         >
-          <td className='py-3 px-6 col-span-1'>
+          <td className='py-3 px-8 col-span-1'>
             <div className='dataTable'>
               <span>{index + 1 + (page - 1) * LIMIT}</span>
             </div>
@@ -51,10 +51,10 @@ export const TypeProject = () => {
             </div>
           </td>
           <td className='py-3 px-6 col-span-2'>
-            <div className='dataTable'>{element.priority}</div>
+            <div className='px-16'>{element.priority}</div>
           </td>
-          <td className='py-3 px-6 text-center col-span-2'>
-            <span className='statusTable '>{element.status}</span>
+          <td className='py-3 px-6 col-span-2 text-left'>
+            <span className='statusTable'>{element.status}</span>
           </td>
         </tr>
       ));

@@ -1,26 +1,45 @@
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { handleOutsideClick } from 'src/services/handleOutsideClick';
 import { validId, validName, validPhoneNumber } from 'src/services/regex';
 import { getData } from 'src/utils/utils';
 import { TABLE_NAME, TECH_STACK, PROJECT } from 'src/modules/staff/staff.constants';
 import { updateStaff } from 'src/modules/staff/staff.services';
+import { useParams, useHistory } from 'react-router-dom';
 
-export const EditStaff = ({ index, detail, cancel }) => {
-  const [name, setName] = useState(detail.name);
-  const [date, setDate] = useState(detail.date);
-  const [identificationNumber, setIdentificationNumber] = useState(detail.identificationNumber);
-  const [phoneNumber, setPhoneNumber] = useState(detail.phoneNumber);
-  const [address, setAddress] = useState(detail.address);
-  const [techStacks, setTechStack] = useState(detail.techStacks);
-  const [projects, setProject] = useState(detail.projects);
+export const EditStaff = () => {
+  const history = useHistory();
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const data = getData(TABLE_NAME);
+    setDetail(data.filter(element => element.id === id)[0]);
+  }, []);
+
+  const [name, setName] = useState();
+  const [date, setDate] = useState();
+  const [identificationNumber, setIdentificationNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [address, setAddress] = useState();
+  const [techStacks, setTechStack] = useState();
+  const [projects, setProject] = useState();
   const listTechStacks = getData(TECH_STACK);
   const [isOpenTechStack, setIsOpenTechStack] = useState(false);
   const listProjects = getData(PROJECT);
   const [isOpenProject, setIsOpenProject] = useState(false);
   const refTechStack = useRef();
   const refProject = useRef();
+
+  useEffect(() => {
+    setName(detail.name);
+    setDate(detail.date);
+    setIdentificationNumber(detail.identificationNumber);
+    setPhoneNumber(detail.phoneNumber);
+    setAddress(detail.address);
+    setTechStack(detail.techStacks);
+    setProject(detail.projects);
+  }, [detail]);
 
   const [isNameFilled, setNameFilled] = useState(true);
   const [isDateOfBirthFilled, setDateOfBirthFilled] = useState(true);
@@ -107,8 +126,8 @@ export const EditStaff = ({ index, detail, cancel }) => {
         projects,
         id: detail.id,
       };
-      dispatch(updateStaff(index, staff, TABLE_NAME));
-      cancel(true);
+      dispatch(updateStaff(id, staff, TABLE_NAME));
+      history.push(`/staff/detail/${id}`);
     }
   };
   handleOutsideClick(refTechStack, () =>
@@ -196,7 +215,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
               }}
             >
               <div className='flex flex-auto flex-wrap'>
-                {techStacks.map((element, index) => (
+                {techStacks !== undefined ? techStacks.map((element, index) => (
                   <div
                     key={index}
                     onClick={e => {
@@ -207,7 +226,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
                   >
                     {element}
                   </div>
-                ))}
+                )) : null}
               </div>
             </div>
           </div>
@@ -239,7 +258,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
               }}
             >
               <div className='flex flex-auto flex-wrap'>
-                {projects.map((element, index) => (
+                {projects !== undefined ? projects.map((element, index) => (
                   <div
                     key={index}
                     onClick={e => {
@@ -250,7 +269,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
                   >
                     {element}
                   </div>
-                ))}
+                )) : null}
               </div>
             </div>
           </div>
@@ -275,7 +294,7 @@ export const EditStaff = ({ index, detail, cancel }) => {
             ? <div className='text-red-600'>Please choose project</div> : null}
           <div>
             <div className='groupBtn'>
-              <button className='btnCancel' onClick={() => cancel(true)}>
+              <button className='btnCancel' onClick={() => history.push(`/staff/detail/${id}`)}>
                 <i className='fas fa-times px-3'></i>CANCEL
               </button>
               <button className='btnConfirm' onClick={handleSubmit}>

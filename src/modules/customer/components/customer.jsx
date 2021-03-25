@@ -11,7 +11,7 @@ export const Customer = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleDetail = index => {
-    history.push(`/customer/${index}`);
+    history.push(`/customer/detail/${index}`);
   };
   const customers = useSelector(state => state.customer.data);
   const maxPage = useSelector(state => state.customer.page);
@@ -34,7 +34,7 @@ export const Customer = () => {
         key={index + (page - 1) * LIMIT}
         onClick={() => handleDetail(element.id)}
       >
-        <td className='py-3 px-6'>
+        <td className='py-3 px-8'>
           <div className='dataTable'>
             <span>{index + 1 + (page - 1) * LIMIT}</span>
           </div>
@@ -50,9 +50,9 @@ export const Customer = () => {
           </div>
         </td>
         <td className='py-3 px-6'>
-          <div className='dataTable'>{element.priority}</div>
+          <div className='px-16'>{element.priority}</div>
         </td>
-        <td className='py-3 px-6 text-center'>
+        <td className='py-3 px-6 text-left'>
           <span className='statusTable'>{element.status}</span>
         </td>
       </tr>

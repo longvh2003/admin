@@ -1,14 +1,29 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getData } from 'src/utils/utils';
 import { TABLE_NAME } from 'src/modules/techStack/techStack.constants';
 import { updateTechStack } from 'src/modules/techStack/techStack.services';
+import { useParams, useHistory } from 'react-router-dom';
 
-export const EditTechStack = ({ index, detail, cancel }) => {
+export const EditTechStack = () => {
+  const history = useHistory();
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const data = getData(TABLE_NAME);
+    setDetail(data.filter(element => element.id === id)[0]);
+  }, []);
+
   const [name, setName] = useState(detail.name);
   const [description, setDescription] = useState(detail.description);
   const [status, setStatus] = useState(detail.status);
+
+  useEffect(() => {
+    setName(detail.name);
+    setDescription(detail.description);
+    setStatus(detail.status);
+  }, [detail]);
 
   const [isNameFilled, setIsNameFilled] = useState(true);
   const [isDescriptionFilled, setDescriptionFilled] = useState(true);
@@ -51,8 +66,8 @@ export const EditTechStack = ({ index, detail, cancel }) => {
             element.name === techStack.name && element.description === techStack.description,
         ).length === 0
       ) {
-        dispatch(updateTechStack(index, techStack, TABLE_NAME));
-        cancel(true);
+        dispatch(updateTechStack(id, techStack, TABLE_NAME));
+        history.push(`/tech-stack/detail/${id}`);
       }
       else alert('Type project already exist!!!');
     }
@@ -98,7 +113,7 @@ export const EditTechStack = ({ index, detail, cancel }) => {
         </div>
         <div>
           <div className='groupBtn'>
-            <button className='btnCancel' onClick={() => cancel(true)}>
+            <button className='btnCancel' onClick={() => history.push(`/tech-stack/detail/${id}`)}>
               <i className='fas fa-times px-3'></i>CANCEL
             </button>
             <button className='btnConfirm' onClick={handleSubmit}>

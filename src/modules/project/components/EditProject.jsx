@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { handleOutsideClick } from 'src/services/handleOutsideClick';
 import { getData } from 'src/utils/utils';
@@ -12,8 +12,17 @@ import {
   STAFF,
 } from '../project.constants';
 import { updateProject } from '../project.services';
+import { useParams, useHistory } from 'react-router-dom';
 
-export const EditProject = ({ index, detail, cancel }) => {
+export const EditProject = () => {
+  const history = useHistory();
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const data = getData(TABLE_NAME);
+    setDetail(data.filter(element => element.id === id)[0]);
+  }, []);
+
   const [name, setName] = useState(detail.name);
   const [description, setDescription] = useState(detail.description);
   const [typeProjects, setTypeProject] = useState(detail.typeProjects);
@@ -31,6 +40,17 @@ export const EditProject = ({ index, detail, cancel }) => {
   const [isOpenDepartment, setIsOpenDepartment] = useState(false);
   const listStaffs = getData(STAFF);
   const [isOpenStaff, setIsOpenStaff] = useState(false);
+
+  useEffect(() => {
+    setName(detail.name);
+    setDescription(detail.description);
+    setTypeProject(detail.typeProjects);
+    setStatusProject(detail.statusProjects);
+    setTechStack(detail.techStacks);
+    setDepartment(detail.departments);
+    setStaff(detail.staffs);
+  }, [detail]);
+
   const refTypeProject = useRef();
   const refStatusProject = useRef();
   const refTechStack = useRef();
@@ -140,8 +160,8 @@ export const EditProject = ({ index, detail, cancel }) => {
           element => element.name === project.name && element.description === project.description,
         ).length === 0
       ) {
-        dispatch(updateProject(index, project, TABLE_NAME));
-        cancel(true);
+        dispatch(updateProject(id, project, TABLE_NAME));
+        history.push(`/project/detail/${id}`);
       }
       else alert('Type project already exist!!!');
     }
@@ -198,7 +218,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               }}
             >
               <div className='flex flex-auto flex-wrap'>
-                {typeProjects.map((element, index) => (
+                {typeProjects !== undefined ? typeProjects.map((element, index) => (
                   <div
                     key={index}
                     onClick={e => {
@@ -209,7 +229,7 @@ export const EditProject = ({ index, detail, cancel }) => {
                   >
                     {element}
                   </div>
-                ))}
+                )) : null}
               </div>
             </div>
           </div>
@@ -241,7 +261,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               }}
             >
               <div className='flex flex-auto flex-wrap'>
-                {statusProjects.map((element, index) => (
+                {statusProjects !== undefined ? statusProjects.map((element, index) => (
                   <div
                     key={index}
                     onClick={e => {
@@ -252,7 +272,7 @@ export const EditProject = ({ index, detail, cancel }) => {
                   >
                     {element}
                   </div>
-                ))}
+                )) : null}
               </div>
             </div>
           </div>
@@ -285,7 +305,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               }}
             >
               <div className='flex flex-auto flex-wrap'>
-                {techStacks.map((element, index) => (
+                {techStacks !== undefined ? techStacks.map((element, index) => (
                   <div
                     key={index}
                     onClick={e => {
@@ -296,7 +316,7 @@ export const EditProject = ({ index, detail, cancel }) => {
                   >
                     {element}
                   </div>
-                ))}
+                )) : null}
               </div>
             </div>
           </div>
@@ -328,7 +348,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               }}
             >
               <div className='flex flex-auto flex-wrap'>
-                {departments.map((element, index) => (
+                {departments !== undefined ? departments.map((element, index) => (
                   <div
                     key={index}
                     onClick={e => {
@@ -339,7 +359,7 @@ export const EditProject = ({ index, detail, cancel }) => {
                   >
                     {element}
                   </div>
-                ))}
+                )) : null}
               </div>
             </div>
           </div>
@@ -371,7 +391,7 @@ export const EditProject = ({ index, detail, cancel }) => {
               }}
             >
               <div className='flex flex-auto flex-wrap'>
-                {staffs.map((element, index) => (
+                {staffs !== undefined ? staffs.map((element, index) => (
                   <div
                     key={index}
                     onClick={e => {
@@ -382,7 +402,7 @@ export const EditProject = ({ index, detail, cancel }) => {
                   >
                     {element}
                   </div>
-                ))}
+                )) : null}
               </div>
             </div>
           </div>
@@ -407,7 +427,7 @@ export const EditProject = ({ index, detail, cancel }) => {
             ? <div className='text-red-600'>Please choose staff</div> : null}
           <div>
             <div className='groupBtn'>
-              <button className='btnCancel' onClick={() => cancel(true)}>
+              <button className='btnCancel' onClick={() => history.push(`/project/detail/${id}`)}>
                 <i className='fas fa-times px-3'></i>CANCEL
               </button>
               <button className='btnConfirm' onClick={handleSubmit}>

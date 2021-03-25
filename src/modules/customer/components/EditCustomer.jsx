@@ -1,15 +1,31 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getData } from 'src/utils/utils';
-import { TABLE_NAME } from 'src/modules/typeProjects/typeProject.constants';
-import { updateTypeProject } from 'src/modules/typeProjects/typeProject.services';
+import { TABLE_NAME } from 'src/modules/customer/customer.constants';
+import { updateCustomer } from 'src/modules/customer/customer.services';
+import { useParams, useHistory } from 'react-router-dom';
 
-export const EditTypeProject = ({ index, detail, cancel }) => {
-  const [name, setName] = useState(detail.name);
-  const [description, setDescription] = useState(detail.description);
-  const [priority, setPriority] = useState(detail.priority);
-  const [status, setStatus] = useState(detail.status);
+export const EditCustomer = () => {
+  const history = useHistory();
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const data = getData(TABLE_NAME);
+    setDetail(data.filter(element => element.id === id)[0]);
+  }, []);
+
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [priority, setPriority] = useState();
+  const [status, setStatus] = useState();
+
+  useEffect(() => {
+    setName(detail.name);
+    setDescription(detail.description);
+    setPriority(detail.priority);
+    setStatus(detail.status);
+  }, [detail]);
 
   const [isNameFilled, setIsNameFilled] = useState(true);
   const [isDescriptionFilled, setDescriptionFilled] = useState(true);
@@ -46,7 +62,7 @@ export const EditTypeProject = ({ index, detail, cancel }) => {
     if (status === 'Choose..') setStatusFilled(false);
     else setStatusFilled(true);
     if (name !== '' && description !== '' && priority !== 'Choose..' && status !== 'Choose..') {
-      const typeProject = {
+      const customer = {
         name,
         description,
         priority,
@@ -56,21 +72,22 @@ export const EditTypeProject = ({ index, detail, cancel }) => {
       if (
         listData.filter(
           element =>
-            element.name === typeProject.name && element.description === typeProject.description,
+            element.name === customer.name && element.description === customer.description,
         ).length === 0
       ) {
-        dispatch(updateTypeProject(index, typeProject, TABLE_NAME));
-        cancel(true);
+        dispatch(updateCustomer(id, customer, TABLE_NAME));
+        history.push(`/customer/detail/${id}`);
       }
       else alert('Type project already exist!!!');
     }
   };
+  console.log(name);
   return (
     <div>
       <div className='header'>CREATE</div>
       <div className='containerDetail'>
         <div className='groupData'>
-          <label className='leading-loose'>Name:</label>
+          <label className='leading-loose'>Name :</label>
           <input
             type='text'
             className='inputDetail'
@@ -80,9 +97,10 @@ export const EditTypeProject = ({ index, detail, cancel }) => {
             autoFocus
           />
         </div>
-        {!isNameFilled ? <div className='text-red-600'>Please fill in name</div> : null}
+        {!isNameFilled
+          ? <div className='text-red-600'>Please fill in name</div> : null}
         <div className='groupData'>
-          <label className='leading-loose'>Description:</label>
+          <label className='leading-loose'>Description :</label>
           <textarea
             type='text'
             className='inputDetail'
@@ -115,11 +133,12 @@ export const EditTypeProject = ({ index, detail, cancel }) => {
             <option value='active'>Active</option>
             <option value='inactive'>Inactive</option>
           </select>
-          {!isStatusFilled ? <div className='text-red-600'>Please choose status</div> : null}
+          {!isStatusFilled
+            ? <div className='text-red-600'>Please choose status</div> : null}
         </div>
         <div>
           <div className='groupBtn'>
-            <button className='btnCancel' onClick={() => cancel(true)}>
+            <button className='btnCancel' onClick={() => history.push(`/customer/detail/${id}`)}>
               <i className='fas fa-times px-3'></i>CANCEL
             </button>
             <button className='btnConfirm' onClick={handleSubmit}>

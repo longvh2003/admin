@@ -11,7 +11,7 @@ export const TechStack = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleDetail = index => {
-    history.push(`/tech-stack/${index}`);
+    history.push(`/tech-stack/detail/${index}`);
   };
   const techStacks = useSelector(state => state.techStack.data);
   const maxPage = useSelector(state => state.techStack.page);
@@ -34,7 +34,7 @@ export const TechStack = () => {
         key={index + (page - 1) * LIMIT}
         onClick={() => handleDetail(element.id)}
       >
-        <td className='py-3 px-6'>
+        <td className='py-3 px-8'>
           <div className='dataTable'>
             <span>{index + 1 + (page - 1) * LIMIT}</span>
           </div>
@@ -49,8 +49,8 @@ export const TechStack = () => {
             <span>{element.description}</span>
           </div>
         </td>
-        <td className='py-3 px-6 text-center'>
-          <span className='statusTable '>{element.status}</span>
+        <td className='py-3 px-6 text-left'>
+          <span className='statusTable'>{element.status}</span>
         </td>
       </tr>
     ));

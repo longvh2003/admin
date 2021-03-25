@@ -7,12 +7,10 @@ import { delAStaff } from 'src/modules/staff/staff.services';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getData, getIndex } from 'src/utils/utils';
-import { EditStaff } from 'src/modules/staff/components/EditStaff';
 import { handleOutsideClick } from 'src/services/handleOutsideClick';
 
 export const StaffDetail = () => {
   const [toggleDelete, setToggleDelete] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(true);
   const [detail, setDetail] = useState({});
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,7 +18,7 @@ export const StaffDetail = () => {
   useEffect(() => {
     const data = getData(TABLE_NAME);
     setDetail(data.filter(element => element.id === id)[0]);
-  }, [isUpdate]);
+  }, []);
   const deleteStaff = (index, TABLE_NAME) => {
     dispatch(delAStaff(index, TABLE_NAME));
     history.push('/staff/page/1');
@@ -29,16 +27,16 @@ export const StaffDetail = () => {
     const index = getIndex(element, TABLE);
     switch (TABLE) {
       case TECH_STACK:
-        history.push(`/tech-stack/${index}`);
+        history.push(`/tech-stack/detail/${index}`);
         break;
       case PROJECT:
-        history.push(`/project/${index}`);
+        history.push(`/project/detail/${index}`);
         break;
     }
   };
   const ref = useRef();
   handleOutsideClick(ref, () => { if (toggleDelete) setToggleDelete(false); });
-  return isUpdate ? (
+  return (
     <div className='relative'>
       {toggleDelete ? <div
         className='modalConfirm'
@@ -120,14 +118,12 @@ export const StaffDetail = () => {
             <button className='btnCancel' onClick={() => setToggleDelete(true)}>
               <i className='fas fa-times px-3'></i>DELETE
             </button>
-            <button className='btnConfirm' onClick={() => setIsUpdate(false)}>
+            <button className='btnConfirm' onClick={() => history.push(`/staff/edit/${id}`)}>
               UPDATE
             </button>
           </div>
         </div>
       </div>
     </div>
-  ) : (
-    <EditStaff index={id} detail={detail} cancel={setIsUpdate} />
   );
 };

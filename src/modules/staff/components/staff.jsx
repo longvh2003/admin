@@ -11,7 +11,7 @@ export const Staff = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleDetail = index => {
-    history.push(`/staff/${index}`);
+    history.push(`/staff/detail/${index}`);
   };
   const staffs = useSelector(state => state.staff.data);
   const maxPage = useSelector(state => state.staff.page);
@@ -31,17 +31,17 @@ export const Staff = () => {
     .map((element, index) => (
       <tr className='rowTable' key={index + (page - 1) * 3}
         onClick={() => handleDetail(element.id)}>
-        <td className='py-3 px-6'>
+        <td className='py-3 px-14'>
           <div className='dataTable'>
             <span>{index + 1 + (page - 1) * LIMIT}</span>
           </div>
         </td>
-        <td className='py-3 px-6'>
+        <td className='py-3 px-12'>
           <div className='dataTable'>
             <span>{element.name}</span>
           </div>
         </td>
-        <td className='py-3 px-6'>
+        <td className='py-3 px-8'>
           <div className='dataTable'>
             <span>{element.date}</span>
           </div>
@@ -59,8 +59,8 @@ export const Staff = () => {
       <table className='w-full table-auto'>
         <thead>
           <tr className='rowHeader'>
-            <th className='headerTable'>No.</th>
-            <th className='headerTable'>Name</th>
+            <th className='py-3 text-left text-gray-600 px-14'>No.</th>
+            <th className='py-3 text-left text-gray-600 px-12'>Name</th>
             <th className='headerTable'>Date of Birth</th>
           </tr>
         </thead>

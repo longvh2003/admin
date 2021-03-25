@@ -1,17 +1,35 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getData } from 'src/utils/utils';
-import { TABLE_NAME } from 'src/modules/projectStatus/statusProject.constants';
-import { updateStatusProject } from 'src/modules/projectStatus/statusProject.services';
+import { TABLE_NAME } from 'src/modules/typeProjects/typeProject.constants';
+import { updateTypeProject } from 'src/modules/typeProjects/typeProject.services';
+import { useParams, useHistory } from 'react-router-dom';
 
-export const EditStatusProject = ({ index, detail, cancel }) => {
+export const EditTypeProject = () => {
+  const history = useHistory();
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const data = getData(TABLE_NAME);
+    setDetail(data.filter(element => element.id === id)[0]);
+  }, []);
+
   const [name, setName] = useState(detail.name);
   const [description, setDescription] = useState(detail.description);
+  const [priority, setPriority] = useState(detail.priority);
   const [status, setStatus] = useState(detail.status);
+
+  useEffect(() => {
+    setName(detail.name);
+    setDescription(detail.description);
+    setPriority(detail.priority);
+    setStatus(detail.status);
+  }, [detail]);
 
   const [isNameFilled, setIsNameFilled] = useState(true);
   const [isDescriptionFilled, setDescriptionFilled] = useState(true);
+  const [isPriorityFilled, setPriorityFilled] = useState(true);
   const [isStatusFilled, setStatusFilled] = useState(true);
 
   const handleChangeName = e => {
@@ -20,6 +38,10 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
 
   const handleChangeDescription = e => {
     setDescription(e.target.value);
+  };
+
+  const handleChangePriority = e => {
+    setPriority(e.target.value);
   };
 
   const handleChangeStatus = e => {
@@ -35,26 +57,28 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
     else setIsNameFilled(true);
     if (description === '') setDescriptionFilled(false);
     else setDescriptionFilled(true);
+    if (priority === 'Choose..') setPriorityFilled(false);
+    else setPriorityFilled(true);
     if (status === 'Choose..') setStatusFilled(false);
     else setStatusFilled(true);
-    if (name !== '' && description !== '' && status !== 'Choose..') {
-      const statusProject = {
+    if (name !== '' && description !== '' && priority !== 'Choose..' && status !== 'Choose..') {
+      const typeProject = {
         name,
         description,
+        priority,
         status,
         id: detail.id,
       };
       if (
         listData.filter(
           element =>
-            element.name === statusProject.name &&
-            element.description === statusProject.description,
+            element.name === typeProject.name && element.description === typeProject.description,
         ).length === 0
       ) {
-        dispatch(updateStatusProject(index, statusProject, TABLE_NAME));
-        cancel(true);
+        dispatch(updateTypeProject(id, typeProject, TABLE_NAME));
+        history.push(`/type-project/detail/${id}`);
       }
-      else alert('Status project already exist!!!');
+      else alert('Type project already exist!!!');
     }
   };
   return (
@@ -62,7 +86,7 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
       <div className='header'>CREATE</div>
       <div className='containerDetail'>
         <div className='groupData'>
-          <label className='leading-loose'>Name :</label>
+          <label className='leading-loose'>Name:</label>
           <input
             type='text'
             className='inputDetail'
@@ -74,7 +98,7 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
         </div>
         {!isNameFilled ? <div className='text-red-600'>Please fill in name</div> : null}
         <div className='groupData'>
-          <label className='leading-loose'>Description :</label>
+          <label className='leading-loose'>Description:</label>
           <textarea
             type='text'
             className='inputDetail'
@@ -86,18 +110,33 @@ export const EditStatusProject = ({ index, detail, cancel }) => {
         {!isDescriptionFilled
           ? <div className='text-red-600'>Please fill in description</div> : null}
         <div className='groupData'>
+          <label>Priority:</label>
+          <select
+            className='select'
+            name='priority'
+            value={priority}
+            onChange={handleChangePriority}
+          >
+            <option value='Choose..'>Choose..</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+          </select>
+          {!isPriorityFilled
+            ? <div className='text-red-600'>Please choose priority number</div> : null}
           <label>Status:</label>
           <select className='select' name='status' value={status} onChange={handleChangeStatus}>
             <option value='Choose..'>Choose..</option>
             <option value='active'>Active</option>
             <option value='inactive'>Inactive</option>
           </select>
+          {!isStatusFilled ? <div className='text-red-600'>Please choose status</div> : null}
         </div>
-        {!isStatusFilled
-          ? <div className='text-red-600'>Please choose status</div> : null}
         <div>
           <div className='groupBtn'>
-            <button className='btnCancel' onClick={() => cancel(true)}>
+            <button className='btnCancel'
+              onClick={() => history.push(`/type-project/detail/${id}`)}>
               <i className='fas fa-times px-3'></i>CANCEL
             </button>
             <button className='btnConfirm' onClick={handleSubmit}>
