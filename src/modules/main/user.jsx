@@ -11,7 +11,8 @@ export const User = () => {
         </button>
       </li>
       <li className='px-3 hover:text-white '>
-        <button onClick={() => history.push('/staff/1')} className='focus:outline-none'>
+        <button onClick={() => history.push('/staff/detail/sazi9bao')}
+          className='focus:outline-none'>
           <i className='fas fa-users-cog px-2'></i>View profile
         </button>
       </li>

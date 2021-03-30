@@ -81,7 +81,6 @@ export const EditCustomer = () => {
       else alert('Type project already exist!!!');
     }
   };
-  console.log(name);
   return (
     <div>
       <div className='header'>CREATE</div>

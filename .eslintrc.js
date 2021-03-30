@@ -36,7 +36,7 @@ module.exports = {
     'max-len': ['error', { code: 100, tabWidth: 2, ignoreUrls: true }],
     'no-array-constructor': 2,
     'no-cond-assign': 2,
-    // 'no-console': [2, { allow: ['info', 'warn', 'error'] }],
+    'no-console': [2, { allow: ['info', 'warn', 'error'] }],
     'no-const-assign': 2,
     'no-constant-condition': 2,
     'no-debugger': 2,
